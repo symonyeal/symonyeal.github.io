@@ -5,4 +5,3 @@
    `content/profile.toml`.
 2. **Thesis link.** No public copy in SFU Summit was found; the site links the PDF in the
    Hypergraph-Dualization repository. Replace it if a Summit or DOI link exists.
-3. **Publication.** The site is local until the owner approves.
