@@ -144,9 +144,11 @@ def index():
                   for x in CV["education"])
     desc = f"{P['name']}: {P['role'].lower()}. {P['lead']}"
     return head(f"{P['name']} · {P['role']}", desc, "") + f"""<main id="main">
-<section class="hero wrap" aria-labelledby="name">
+<section class="hero wrap{' has-photo' if P['photo'] else ''}" aria-labelledby="name">
+{f'<img class="photo" src="{e(P["photo"])}" width="600" height="600" alt="Portrait of {e(P["name"])}">' if P['photo'] else ''}
 <h1 id="name">{e(P['name'])}</h1>
 <p class="role">{e(P['role'])} · {e(P['location'])}</p>
+{f'<p class="status">{e(P["status"])}</p>' if P['status'] else ''}
 <p class="lead">{e(P['lead'])}</p>
 <div class="intro">{intro}</div>
 <dl class="facts">{facts}</dl>

@@ -27,6 +27,19 @@ Each entry: the decision, the alternatives, the reason, the date.
   mid-sentence; "modeling" → "modelling". Added from the thesis title page: thesis title and
   senior supervisor. Added: Washington and Lee's location (Lexington, VA).
 
+## 2026-10-20, owner's answers
+
+- Ministry bullet corrected from 80% to 20%, agreeing with the summary.
+- "On valid work permit" shown in the résumé contact line and PDF. Phone stays omitted.
+- No AI-assistance disclosure.
+- The four SFU research-assistant percentages (15%, 30%, 25%, 18%) removed; each bullet keeps
+  the work it describes. Counts (50+, 10+, 20+, 15+) unchanged.
+- Skills: JavaScript added; new line "Optimization and mathematics": Gurobi, CPLEX, HiGHS, SCIP,
+  Pyomo, SageMath (all evidenced by the résumé bullets or the public repositories).
+- Headshot and status line come from LinkedIn; LinkedIn refuses automated access, so they are
+  optional fields (`photo`, `status` in `content/profile.toml`) awaiting the owner's files.
+- LinkedIn URL confirmed by the owner.
+
 ## Open
 
 See [OPEN.md](OPEN.md).
