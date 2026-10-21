@@ -15,7 +15,7 @@ Read before changing anything. [README](README.md) states how the site is built;
 | Content lives in `content/*.toml` only; the HTML and PDF are generated. | One source, so the page, the PDF and the tests cannot disagree. |
 | No framework, build tool, CDN or tracker. | Static hosting, fast on a phone, nothing third-party. |
 | Figures show the actual work (a result, a solution, a screen), never stock imagery. | The owner's instruction. |
-| Nothing is pushed or published without the owner's approval. | The owner reviews before publication. |
+| A change is pushed to `main` once the gate passes; `pages.yml` publishes it. | Published 2026-10-20 with the owner's approval. |
 
 ## Before a change is finished
 

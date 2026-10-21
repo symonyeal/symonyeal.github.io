@@ -1,7 +1,7 @@
 # symonyeal.github.io
 
 Personal site of Saimon Islam: introduction, selected work, every public project, and the
-full résumé with a PDF. **Site: https://symonyeal.github.io/** (after publication).
+full résumé with a PDF. **Site: https://symonyeal.github.io/**.
 
 Static HTML, CSS and one small script; no framework, no server, no third-party requests.
 Three content files are the single source; `build.py` writes the pages from them.
