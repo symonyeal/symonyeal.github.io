@@ -14,7 +14,7 @@ Three content files are the single source; `build.py` writes the pages from them
 | `build.py` | content → `site/index.html`, `site/resume.html`; `--render` also writes the PDF and `site/og.png` |
 | `site/` | The published folder; `*.html`, the PDF and `og.png` are generated, commit them |
 | `tests/` | Pages match the content; local links resolve; no phone number; the PDF transcribes the résumé |
-| `qa/browser.py` | Edge checks: no horizontal scroll at 360–1440 px in both schemes, navigation, details, PDF download, outbound links |
+| `qa/browser.py` | Edge checks: no horizontal scroll at 360–1440 px, navigation, PDF download, outbound links |
 
 ## View locally
 
@@ -29,10 +29,7 @@ Open http://127.0.0.1:8765/. Opening `site/index.html` directly also works.
 
 1. Add a `[[project]]` block to `content/projects.toml`. Copy numbers only from the project's
    own README or site.
-2. Add `site/img/<slug>-1200.webp` and `<slug>-600.webp`, both 3:2 (1200×800, 600×400), showing
-   the actual result: a chart, a solution, or the site's opening screen. Without a figure, give
-   `formula` instead.
-3. `python build.py`, then the gate below.
+2. `python build.py`, then the gate below.
 
 ## Update the résumé
 
@@ -50,4 +47,4 @@ python qa/browser.py --external      # with the local server running
 
 GitHub Actions runs the first two on every push; `pages.yml` publishes `site/`.
 
-Code: MIT. Text, résumé and figures: © Saimon Islam. Font (Source Serif 4): SIL Open Font License (`site/assets/fonts/OFL.txt`).
+Code: MIT. Text and résumé: © Saimon Islam. Font (Inter): SIL Open Font License (`site/assets/fonts/OFL.txt`).

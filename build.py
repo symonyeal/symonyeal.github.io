@@ -46,9 +46,8 @@ def head(title, desc, path):
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="color-scheme" content="light dark">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -69,36 +68,14 @@ def foot():
 """
 
 
-def figure(p):
-    if "formula" in p:
-        return (f'<figure class="fig formula"><div class="eq" role="img" aria-label="{e(p["caption"])}">'
-                f'{e(p["formula"])}</div></figure>')
-    s = p["slug"]
-    return (f'<figure class="fig"><a href="img/{s}-1200.webp" title="{e(p["caption"])}">'
-            f'<img src="img/{s}-600.webp" srcset="img/{s}-600.webp 600w, img/{s}-1200.webp 1200w" '
-            f'sizes="(min-width: 44rem) 13rem, 100vw" width="600" height="400" loading="lazy" decoding="async" alt="{e(p["image_alt"])}"></a></figure>')
-
-
 def project(p):
-    """Figure, title, the finding in one sentence; problem, results, limits and method on demand."""
-    res = "".join(f"<li>{e(r)}</li>" for r in p["results"])
-    links = " · ".join(a(u, l) for l, u in p["links"])
-    return f"""<li class="project" id="{p['slug']}">
-{figure(p)}
-<div>
+    """Card: title, year and subject, what it is and found, links. The full write-up stays in content/ and the repository."""
+    links = "".join(a(u, l) for l, u in p["links"])
+    return f"""<li class="card" id="{p['slug']}">
+<p class="meta">{e(p['subject'])} · {e(p['year'])}</p>
 <h3>{a(p['links'][0][1], p['title'])}</h3>
-<p class="meta">{e(p['year'])} · {e(p['subject'])}</p>
 <p>{e(p['headline'])}</p>
-<details><summary>Details</summary>
-<p><em>Problem.</em> {e(p['problem'])}</p>
-<p><em>Method.</em> {e(p['approach'])}</p>
-<p><em>Results.</em></p><ul>{res}</ul>
-<p><em>Limits.</em> {e(p['limits'])}</p>
-<p><em>Contribution.</em> {e(p['contribution'])}</p>
-<p class="cap">Figure: {e(p['caption'])}</p>
-</details>
 <p class="links">{links}</p>
-</div>
 </li>"""
 
 
@@ -117,12 +94,12 @@ def index():
 <p class="role">{e(P['role'])} · {e(P['location'])}</p>
 {f'<p class="status">{e(P["status"])}</p>' if P['status'] else ''}
 {intro}
-<p class="links">{a('resume.html', 'Résumé')} ({a(PDF, 'PDF')}) · {a('mailto:' + P['email'], 'Email')} · {a(P['github'], 'GitHub')} · {a(P['linkedin'], 'LinkedIn')}</p>
+<p class="links">{a('resume.html', 'Résumé', 'btn')}{a('mailto:' + P['email'], 'Email')}{a(P['github'], 'GitHub')}{a(P['linkedin'], 'LinkedIn')}</p>
 </section>
 
 <section id="projects" aria-labelledby="projects-h">
 <h2 id="projects-h">Projects</h2>
-<ol class="projects">{''.join(project(p) for p in PR)}</ol>
+<ul class="grid">{''.join(project(p) for p in PR)}</ul>
 </section>
 
 <section id="experience" aria-labelledby="exp-h">
@@ -130,7 +107,7 @@ def index():
 <ul class="cvlist">{jobs}</ul>
 <h2>Education</h2>
 <ul class="cvlist">{eds}</ul>
-<p>{a('resume.html', 'Full résumé')} ({a(PDF, 'PDF')})</p>
+<p class="links">{a('resume.html', 'Full résumé')}{a(PDF, 'PDF')}</p>
 </section>
 </main>
 """ + foot()
@@ -161,7 +138,7 @@ def resume():
 <div class="cv-head">
 <h1>{e(P['name'])}</h1>
 <p class="contactline">{contact}</p>
-<p class="links noprint">{a(PDF, 'Download PDF')} · {a('./#projects', 'Projects')}</p>
+<p class="links noprint">{a(PDF, 'Download PDF', 'btn')}{a('./#projects', 'Projects')}</p>
 </div>
 <section aria-labelledby="sum-h"><h2 id="sum-h">Summary</h2><p>{e(CV['summary'])}</p></section>
 <section aria-labelledby="xp-h"><h2 id="xp-h">Experience</h2>{''.join(job(x) for x in CV['experience'])}</section>
