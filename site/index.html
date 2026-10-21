@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saimon Islam · Operations research and data analysis</title>
+<meta name="description" content="Saimon Islam: operations research and data analysis. I build optimization and statistical models that report how far each answer can be trusted.">
+<link rel="canonical" href="https://symonyeal.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Saimon Islam · Operations research and data analysis">
+<meta property="og:description" content="Saimon Islam: operations research and data analysis. I build optimization and statistical models that report how far each answer can be trusted.">
+<meta property="og:url" content="https://symonyeal.github.io/">
+<meta property="og:image" content="https://symonyeal.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+<a class="brand" href="./">Saimon Islam</a>
+<nav aria-label="Main"><ul>
+<li><a href="./#work">Work</a></li><li><a href="./#projects">Projects</a></li><li><a href="./#experience">Experience</a></li><li><a href="resume.html">Résumé</a></li><li><a href="./#contact">Contact</a></li>
+</ul></nav>
+</div></header>
+<main id="main">
+<section class="hero wrap" aria-labelledby="name">
+<h1 id="name">Saimon Islam</h1>
+<p class="role">Operations research and data analysis · Vancouver, BC</p>
+<p class="lead">I build optimization and statistical models that report how far each answer can be trusted.</p>
+<div class="intro"><p>I am a mathematician working in operations research and data analysis. My MSc in Mathematics at Simon Fraser University studied how symmetry affects the Fredman–Khachiyan algorithm for hypergraph dualization. From 2023 to 2025 I worked in compensation policy and analysis at the British Columbia Ministry of Health, on anesthesia contracts across 30 sites.</p><p>My public projects apply the same discipline to routing, supply chains, electricity markets, housing and sport. Each reported answer comes with its evidence: a lower bound beside a plan, a survey margin beside a change, an independent check beside a solver. Each also states what it does not show.</p></div>
+<dl class="facts"><div><dt>MSc Mathematics (Operations Research)</dt><dd>Simon Fraser University, 2024</dd></div><div><dt>Compensation analyst</dt><dd>BC Ministry of Health, 2023–2025</dd></div><div><dt>9 public research repositories</dt><dd>5 with interactive sites</dd></div></dl>
+<p class="links"><a href="resume.html" class="btn">Résumé</a><a href="Saimon-Islam-Resume.pdf">Download PDF</a><a href="https://github.com/symonyeal" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/saimon-islam-b9291292" rel="noopener">LinkedIn</a><a href="mailto:symonyeal@gmail.com">Email</a></p>
+</section>
+
+<section class="areas wrap" aria-labelledby="areas-h">
+<h2 id="areas-h">What I work on</h2>
+<div class="cols"><div><h3>Optimization</h3><p>Mixed-integer and convex models with certificates: column generation, interior-point methods, network interdiction, enumeration.</p></div><div><h3>Applied statistics</h3><p>Estimation that respects sampling error, forecasts tested out of sample, and paired-comparison rating models.</p></div><div><h3>Discrete mathematics</h3><p>Hypergraph transversals, monotone Boolean duality and the role of symmetry in recursive algorithms.</p></div></div>
+</section>
+
+<section id="work" class="wrap" aria-labelledby="work-h">
+<h2 id="work-h">Selected work</h2>
+<p class="note">Each summary leads with the finding, then states the problem, the method, the results and what the work does not show. Numbers are taken from the project’s repository.</p>
+<article class="feature" id="electric-fleet">
+<figure class="fig"><a href="img/electric-fleet-1200.webp" title="Open full size"><img src="img/electric-fleet-1200.webp" srcset="img/electric-fleet-600.webp 600w, img/electric-fleet-1200.webp 1200w" sizes="(min-width: 60rem) 34rem, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Four routes leaving one depot on benchmark instance E-n22-k4, with charging stations marked as triangles: the replayed solution of length 384.678, certified optimal."></a><figcaption>E-n22-k4: the certified optimal routes (length 384.678).</figcaption></figure>
+<div class="body">
+<p class="meta">Optimization · 2026</p>
+<h3>Electric Fleet Optimization</h3>
+<p class="headline">Proves the optimal routes for two instances of a public electric-vehicle routing benchmark; on one, the published value was not optimal.</p>
+<dl class="wu">
+<dt>Problem</dt><dd>Electric vans and buses have limited range, so a plan must decide when and where each vehicle recharges as well as where it goes. The IEEE WCCI-2020 benchmark for electric-vehicle routing published best-known values that were never proven optimal, and no method reported a lower bound.</dd>
+<dt>Results</dt><dd><ul><li>E-n22-k4 and E-n23-k3 certified optimal. On E-n23-k3 the optimum, 571.95, is shorter than the published 573.13.</li><li>E-n30-k3 bracketed within 0.191%: a route shorter than the published one, and a proof that none is more than 0.2% shorter.</li><li>Route 100: ignoring battery limits, 16 buses cover the timetable.</li></ul></dd>
+<dt>Limits</dt><dd>One depot, identical vehicles, no time windows or driver shifts. Four of the seven benchmark instances remain open, and the full-day bus result with batteries and BC Hydro prices has not yet been computed. It is not TransLink’s operating plan.</dd>
+<dt>Contribution</dt><dd>Independent project: formulation, algorithms, validation and documentation.</dd>
+</dl>
+<details class="method"><summary>Method</summary><p>A mixed-integer model on a station-path multigraph, bounded by a set-partitioning linear program solved by column generation with interior-point duals. Every reported plan is replayed, and every bound passes a schema check, so each instance is labelled certified, bracketed or open. The same core sizes buses and chargers for TransLink’s Route 100 timetable (219 trips a day).</p></details>
+<p class="links"><a href="https://github.com/symonyeal/Electric-Fleet-Optimization" class="btn" rel="noopener">Repository</a></p>
+</div>
+</article><article class="feature" id="supply-chain-cuts">
+<figure class="fig"><a href="img/supply-chain-cuts-1200.webp" title="Open full size"><img src="img/supply-chain-cuts-1200.webp" srcset="img/supply-chain-cuts-600.webp 600w, img/supply-chain-cuts-1200.webp 1200w" sizes="(min-width: 60rem) 34rem, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Bar chart from the project site: each layer of the lithium-ion chain, from anode material to refined nickel, with 2024 supply in years of annual requirement on a log scale, coloured by whether the figure comes from production statistics, trade data or imputation."></a><figcaption>Supply of each layer in years of requirement; a single loss can cut only the layers near the dashed line.</figcaption></figure>
+<div class="body">
+<p class="meta">Optimization · 2026</p>
+<h3>Supply Chain Cuts</h3>
+<p class="headline">Five single-country losses, all in China, would each cut world lithium-ion cell output by a quarter or more over two years.</p>
+<dl class="wu">
+<dt>Problem</dt><dd>Batteries and solar panels pass through mines, refineries and factories in many countries. Which losses of one country’s output, alone or with up to two others, would cut world production by at least 25% over 24 months, and how often might that happen?</dd>
+<dt>Results</dt><dd><ul><li>Batteries: five single weak points (cells, cathode material, anode material, graphite, lithium carbonate), assuming plants can switch between LFP and NCM chemistries.</li><li>Solar: four single weak points (polysilicon, wafers, cells, modules).</li><li>If every export restriction recorded since 2012 were a complete shutdown, such a shortfall would occur in about 29% of years for batteries and 24% for solar. These are stress scenarios, not forecasts.</li></ul></dd>
+<dt>Limits</dt><dd>Much capacity outside China is estimated from export volumes. No plant locations are modelled, so natural hazards are a scenario only. Recorded export restrictions fail the predictive test.</dd>
+<dt>Contribution</dt><dd>Independent project: model, enumeration methods, data reconciliation, validation and interactive site.</dd>
+</dl>
+<details class="method"><summary>Method</summary><p>A capacity network from mine to cell, built from 2024 production statistics and, where those are missing, export mass. A recourse linear program gives the least shortfall under each disruption. Minimal cut sets of up to three losses are enumerated three independent ways (an interdiction MILP built from the LP dual, a lattice search, exhaustive search), and their lists agree. Annual probability is bracketed by an exact lower bound plus a Monte Carlo residual.</p></details>
+<p class="links"><a href="https://symonyeal.github.io/Supply-Chain-Cuts/" class="btn" rel="noopener">Interactive site</a><a href="https://github.com/symonyeal/Supply-Chain-Cuts" rel="noopener">Repository</a></p>
+</div>
+</article><article class="feature" id="supplier-panels">
+<figure class="fig"><a href="img/supplier-panels-1200.webp" title="Open full size"><img src="img/supplier-panels-1200.webp" srcset="img/supplier-panels-600.webp 600w, img/supplier-panels-1200.webp 1200w" sizes="(min-width: 60rem) 34rem, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Opening screen of the project site: the headline “30 of 40 sampled baskets cannot survive one supplier failure”, beside a lead case of three canned products with 21 eligible suppliers, a smallest resilient panel of 2 and 1,284 minimal alternatives."></a><figcaption>The project site opens with the answer and a worked basket.</figcaption></figure>
+<div class="body">
+<p class="meta">Optimization · 2026</p>
+<h3>Resilient Supplier Panels</h3>
+<p class="headline">In 30 of 40 sampled USDA food baskets, no choice of suppliers survives the loss of any one supplier, and in each case a single product is the cause.</p>
+<dl class="wu">
+<dt>Problem</dt><dd>The USDA approves vendors for specific products before they may bid on its food purchases. A buyer wants a panel of suppliers that still covers every product in a basket after any one supplier fails. How small can it be, how many exist, and which suppliers cannot be replaced?</dd>
+<dt>Results</dt><dd><ul><li>30 of 40 baskets have no resilient panel; each contains a product with only one approved supplier. Approving a second supplier, not choosing differently, fixes it.</li><li>In the other 10 baskets, 2 to 6 suppliers cover every product after any single failure.</li><li>Canned-goods example: 21 approved suppliers, a smallest panel of 2, and 1,284 certified minimal panels.</li></ul></dd>
+<dt>Limits</dt><dd>Approvals only: not capacity, price, delivery record or shared ownership. One data snapshot (2026-10-15). Research, not a purchasing recommendation.</dd>
+<dt>Contribution</dt><dd>Independent project: model, solver and enumeration pipeline, certificates and interactive site. Release 0.2.0.</dd>
+</dl>
+<details class="method"><summary>Method</summary><p>Resilient panels are the minimal transversals of a scenario hypergraph. A MILP finds the smallest panel (median 0.8 ms). Berge’s method and FK-B, from the author’s MSc thesis code, enumerate every minimal panel. Separate code certifies each panel against the USDA list, and a second MILP certifies that none is missing.</p></details>
+<p class="links"><a href="https://symonyeal.github.io/Resilient-Supplier-Panels/" class="btn" rel="noopener">Interactive site</a><a href="https://github.com/symonyeal/Resilient-Supplier-Panels" rel="noopener">Repository</a><a href="https://github.com/symonyeal/Resilient-Supplier-Panels/releases/tag/v0.2.0" rel="noopener">Release 0.2.0</a></p>
+</div>
+</article><article class="feature" id="hypergraph-dualization">
+<figure class="fig"><a href="img/hypergraph-dualization-1200.webp" title="Open full size"><img src="img/hypergraph-dualization-1200.webp" srcset="img/hypergraph-dualization-600.webp 600w, img/hypergraph-dualization-1200.webp 1200w" sizes="(min-width: 60rem) 34rem, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Interactive report of the FK-A recursion on the Fano plane: a tree of 59 subproblem nodes, each labelled with the sizes of its two hypergraphs, beside a panel showing the root’s automorphism group PSL(3,2) of order 168."></a><figcaption>FK-A on the Fano plane: 59 nodes, 30 leaves; automorphism group PSL(3,2).</figcaption></figure>
+<div class="body">
+<p class="meta">Discrete mathematics · 2023–2024</p>
+<h3>Hypergraph Dualization (MSc thesis)</h3>
+<p class="headline">Both Fredman–Khachiyan algorithms on one model, checked by an independent oracle; a search for hard inputs found one in the Witt design S(4,5,11).</p>
+<dl class="wu">
+<dt>Problem</dt><dd>Given two hypergraphs, decide whether each is the transversal hypergraph of the other: list every minimal way to meet all of a family of sets, and prove the list complete. Whether this can be done in polynomial time is open. Fredman and Khachiyan’s algorithms FK-A and FK-B run in quasi-polynomial time, but FK-A slows on highly symmetric families.</dd>
+<dt>Results</dt><dd><ul><li>FK-A and FK-B agree on every instance, and the oracle confirms every answer. The test suite (457 passing) reproduces the thesis’s published recursion trees.</li><li>A search for new hard instances found one built from the Witt design S(4,5,11).</li><li>Counting distinct subproblems rather than tree nodes, none of the published hard instances is hard for the recursion itself.</li></ul></dd>
+<dt>Limits</dt><dd>Small instances; whether dualization is solvable in polynomial time remains open.</dd>
+<dt>Contribution</dt><dd>MSc thesis, Simon Fraser University, 2024 (senior supervisor: Tamon Stephen). The maintained Python implementation; the legacy implementation credits Saimon Islam and Lacey Liang.</dd>
+</dl>
+<details class="method"><summary>Method</summary><p>The thesis analyses symmetry in clique hypergraphs and their transversals, shows that the FK-A decomposition induces a minor map on the underlying graph, and characterizes hypergraphs that FK-A struggles with. The repository implements FK-A and FK-B on one bitset model, draws their recursion trees side by side, and checks every answer against an independent transversal oracle.</p></details>
+<p class="links"><a href="https://github.com/symonyeal/Hypergraph-Dualization/blob/main/Saimon%20Islam%20Manuscript%20MSc%20Thesis%20(1).pdf" class="btn" rel="noopener">Thesis (PDF)</a><a href="https://github.com/symonyeal/Hypergraph-Dualization" rel="noopener">Repository</a><a href="https://mybinder.org/v2/gh/symonyeal/Hypergraph-Dualization/main?urlpath=lab" rel="noopener">Run in Binder</a></p>
+</div>
+</article><article class="feature" id="mma-rankings">
+<figure class="fig"><a href="img/mma-rankings-1200.webp" title="Open full size"><img src="img/mma-rankings-1200.webp" srcset="img/mma-rankings-600.webp 600w, img/mma-rankings-1200.webp 1200w" sizes="(min-width: 60rem) 34rem, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Chart from the project site: era-adjusted rating at each bout for Jon Jones, Georges St-Pierre and Islam Makhachev, 2002 to 2026, with peaks labelled."></a><figcaption>Era-adjusted rating at each bout, three careers compared.</figcaption></figure>
+<div class="body">
+<p class="meta">Applied statistics · 2026</p>
+<h3>MMA Career Rankings</h3>
+<p class="headline">One rating model of 81,616 professional fights ranks 34,147 fighters by career, peak and current form, on a scale adjusted for era.</p>
+<dl class="wu">
+<dt>Problem</dt><dd>Ranking fighters across three decades and many promotions: rating scales drift upward over time, promotions differ in depth, and a short unbeaten record can look better than a long elite career.</dd>
+<dt>Results</dt><dd><ul><li>81,616 rated fights and 34,147 rated fighters; whole-career coverage for 1,826 of 1,837 eligible fighters (99.4%).</li><li>Published boards for all-time, prime and current form, by weight class, for men and women.</li><li>The site lets a reader change the score’s weights and see the order change, and checks forecast calibration against outcomes.</li></ul></dd>
+<dt>Limits</dt><dd>Not yet shown to predict fights better than a simpler rating; that test is open. Promotion labels are missing from 54% of rated fights.</dd>
+<dt>Contribution</dt><dd>Independent project: rating model, data assembly, release checks and interactive site.</dd>
+</dl>
+<details class="method"><summary>Method</summary><p>Whole-History Rating (Coulom, 2008) fitted to every career at once, so later results revalue earlier wins. Each year is read against its division’s contender line; promotion weights are shrunk toward the average where evidence is thin; titles, contender wins and skill are square-rooted on a common scale before weighting.</p></details>
+<p class="links"><a href="https://symonyeal.github.io/MMA-Career-Rankings/" class="btn" rel="noopener">Interactive site</a><a href="https://github.com/symonyeal/MMA-Career-Rankings" rel="noopener">Repository</a></p>
+</div>
+</article>
+</section>
+
+<section id="projects" class="wrap" aria-labelledby="projects-h">
+<h2 id="projects-h">All projects</h2>
+<div class="filter" role="group" aria-label="Filter by subject" hidden><button type="button" aria-pressed="true" data-subject="">All</button><button type="button" aria-pressed="false" data-subject="Optimization">Optimization</button><button type="button" aria-pressed="false" data-subject="Applied statistics">Applied statistics</button><button type="button" aria-pressed="false" data-subject="Discrete mathematics">Discrete mathematics</button><button type="button" aria-pressed="false" data-subject="Simulation and games">Simulation and games</button></div>
+<p class="count" aria-live="polite"></p>
+<ul class="grid"><li class="card" data-subject="Optimization">
+<figure class="fig"><a href="img/electric-fleet-1200.webp" title="Open full size"><img src="img/electric-fleet-1200.webp" srcset="img/electric-fleet-600.webp 600w, img/electric-fleet-1200.webp 1200w" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 45vw, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Four routes leaving one depot on benchmark instance E-n22-k4, with charging stations marked as triangles: the replayed solution of length 384.678, certified optimal."></a><figcaption>E-n22-k4: the certified optimal routes (length 384.678).</figcaption></figure>
+<p class="meta">Optimization · 2026</p>
+<h3>Electric Fleet Optimization</h3>
+<p>Proves the optimal routes for two instances of a public electric-vehicle routing benchmark; on one, the published value was not optimal.</p>
+<ul class="tags" aria-label="Methods"><li>mixed-integer programming</li><li>column generation</li><li>interior-point methods</li><li>Python</li></ul>
+<p><a href="#electric-fleet">Full summary above</a></p>
+<p class="links"><a href="https://github.com/symonyeal/Electric-Fleet-Optimization" class="btn" rel="noopener">Repository</a></p>
+</li><li class="card" data-subject="Optimization">
+<figure class="fig"><a href="img/supply-chain-cuts-1200.webp" title="Open full size"><img src="img/supply-chain-cuts-1200.webp" srcset="img/supply-chain-cuts-600.webp 600w, img/supply-chain-cuts-1200.webp 1200w" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 45vw, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Bar chart from the project site: each layer of the lithium-ion chain, from anode material to refined nickel, with 2024 supply in years of annual requirement on a log scale, coloured by whether the figure comes from production statistics, trade data or imputation."></a><figcaption>Supply of each layer in years of requirement; a single loss can cut only the layers near the dashed line.</figcaption></figure>
+<p class="meta">Optimization · 2026</p>
+<h3>Supply Chain Cuts</h3>
+<p>Five single-country losses, all in China, would each cut world lithium-ion cell output by a quarter or more over two years.</p>
+<ul class="tags" aria-label="Methods"><li>network interdiction</li><li>linear programming</li><li>Monte Carlo</li><li>supply-chain risk</li><li>Python</li></ul>
+<p><a href="#supply-chain-cuts">Full summary above</a></p>
+<p class="links"><a href="https://symonyeal.github.io/Supply-Chain-Cuts/" class="btn" rel="noopener">Interactive site</a><a href="https://github.com/symonyeal/Supply-Chain-Cuts" rel="noopener">Repository</a></p>
+</li><li class="card" data-subject="Optimization">
+<figure class="fig"><a href="img/supplier-panels-1200.webp" title="Open full size"><img src="img/supplier-panels-1200.webp" srcset="img/supplier-panels-600.webp 600w, img/supplier-panels-1200.webp 1200w" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 45vw, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Opening screen of the project site: the headline “30 of 40 sampled baskets cannot survive one supplier failure”, beside a lead case of three canned products with 21 eligible suppliers, a smallest resilient panel of 2 and 1,284 minimal alternatives."></a><figcaption>The project site opens with the answer and a worked basket.</figcaption></figure>
+<p class="meta">Optimization · 2026</p>
+<h3>Resilient Supplier Panels</h3>
+<p>In 30 of 40 sampled USDA food baskets, no choice of suppliers survives the loss of any one supplier, and in each case a single product is the cause.</p>
+<ul class="tags" aria-label="Methods"><li>hypergraph transversals</li><li>integer programming</li><li>enumeration</li><li>Python</li></ul>
+<p><a href="#supplier-panels">Full summary above</a></p>
+<p class="links"><a href="https://symonyeal.github.io/Resilient-Supplier-Panels/" class="btn" rel="noopener">Interactive site</a><a href="https://github.com/symonyeal/Resilient-Supplier-Panels" rel="noopener">Repository</a><a href="https://github.com/symonyeal/Resilient-Supplier-Panels/releases/tag/v0.2.0" rel="noopener">Release 0.2.0</a></p>
+</li><li class="card" data-subject="Discrete mathematics">
+<figure class="fig"><a href="img/hypergraph-dualization-1200.webp" title="Open full size"><img src="img/hypergraph-dualization-1200.webp" srcset="img/hypergraph-dualization-600.webp 600w, img/hypergraph-dualization-1200.webp 1200w" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 45vw, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Interactive report of the FK-A recursion on the Fano plane: a tree of 59 subproblem nodes, each labelled with the sizes of its two hypergraphs, beside a panel showing the root’s automorphism group PSL(3,2) of order 168."></a><figcaption>FK-A on the Fano plane: 59 nodes, 30 leaves; automorphism group PSL(3,2).</figcaption></figure>
+<p class="meta">Discrete mathematics · 2023–2024</p>
+<h3>Hypergraph Dualization (MSc thesis)</h3>
+<p>Both Fredman–Khachiyan algorithms on one model, checked by an independent oracle; a search for hard inputs found one in the Witt design S(4,5,11).</p>
+<ul class="tags" aria-label="Methods"><li>hypergraphs</li><li>monotone Boolean functions</li><li>automorphism groups</li><li>Python</li><li>SageMath</li></ul>
+<p><a href="#hypergraph-dualization">Full summary above</a></p>
+<p class="links"><a href="https://github.com/symonyeal/Hypergraph-Dualization/blob/main/Saimon%20Islam%20Manuscript%20MSc%20Thesis%20(1).pdf" class="btn" rel="noopener">Thesis (PDF)</a><a href="https://github.com/symonyeal/Hypergraph-Dualization" rel="noopener">Repository</a><a href="https://mybinder.org/v2/gh/symonyeal/Hypergraph-Dualization/main?urlpath=lab" rel="noopener">Run in Binder</a></p>
+</li><li class="card" data-subject="Applied statistics">
+<figure class="fig"><a href="img/mma-rankings-1200.webp" title="Open full size"><img src="img/mma-rankings-1200.webp" srcset="img/mma-rankings-600.webp 600w, img/mma-rankings-1200.webp 1200w" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 45vw, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Chart from the project site: era-adjusted rating at each bout for Jon Jones, Georges St-Pierre and Islam Makhachev, 2002 to 2026, with peaks labelled."></a><figcaption>Era-adjusted rating at each bout, three careers compared.</figcaption></figure>
+<p class="meta">Applied statistics · 2026</p>
+<h3>MMA Career Rankings</h3>
+<p>One rating model of 81,616 professional fights ranks 34,147 fighters by career, peak and current form, on a scale adjusted for era.</p>
+<ul class="tags" aria-label="Methods"><li>rating systems</li><li>Bayesian inference</li><li>paired comparison</li><li>data visualization</li><li>Python</li></ul>
+<p><a href="#mma-rankings">Full summary above</a></p>
+<p class="links"><a href="https://symonyeal.github.io/MMA-Career-Rankings/" class="btn" rel="noopener">Interactive site</a><a href="https://github.com/symonyeal/MMA-Career-Rankings" rel="noopener">Repository</a></p>
+</li><li class="card" data-subject="Applied statistics">
+<figure class="fig"><a href="img/renter-cost-burden-1200.webp" title="Open full size"><img src="img/renter-cost-burden-1200.webp" srcset="img/renter-cost-burden-600.webp 600w, img/renter-cost-burden-1200.webp 1200w" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 45vw, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Opening of the project site: headline figures beside a line chart of the share of renter households paying 30% or more of income, 2011 to 2024, with a shaded survey-margin band."></a><figcaption>Share of renters paying 30% or more, with the Census 90% margin.</figcaption></figure>
+<p class="meta">Applied statistics · 2026</p>
+<h3>Renter Cost Burden</h3>
+<p>Half of renter households in 30 large counties were rent-burdened in both 2011 and 2024; the change is within survey error, and next year’s share cannot be forecast.</p>
+<ul class="tags" aria-label="Methods"><li>survey statistics</li><li>forecasting</li><li>American Community Survey</li><li>Python</li></ul>
+<details><summary>Problem, results and limits</summary><dl class="wu">
+<dt>Problem</dt><dd>Did renter incomes keep up with rent in the 30 largest counties of Colorado, Massachusetts and Washington from 2011 to 2024, and did job growth make renters worse off?</dd>
+<dt>Results</dt><dd><ul><li>51.2% of renter households spent 30% or more of income on rent and utilities in 2011 and 51.9% in 2024, inside the ±1.0-point margin.</li><li>In the median county, rent rose 33% and renter income 32%; seven counties changed by more than the survey can miss.</li><li>Carrying last year’s value forward (error 2.85 points) beat a regression (3.60) and boosted trees (3.12).</li></ul></dd>
+<dt>Limits</dt><dd>Thirty large counties in three states; associations, not causes.</dd>
+<dt>Contribution</dt><dd>Independent project: data pipeline, estimation, forecast tests and site.</dd>
+</dl>
+<details class="method"><summary>Method</summary><p>Census and BLS data, inflation-adjusted. Every change is compared with its Census 90% margin. Forecasts use only figures published by each forecast date, with 2023–2024 held back and registered before scoring.</p></details></details>
+<p class="links"><a href="https://symonyeal.github.io/Renter-Cost-Burden/" class="btn" rel="noopener">Interactive site</a><a href="https://github.com/symonyeal/Renter-Cost-Burden" rel="noopener">Repository</a></p>
+</li><li class="card" data-subject="Optimization">
+<figure class="fig"><a href="img/electricity-pricing-1200.webp" title="Open full size"><img src="img/electricity-pricing-1200.webp" srcset="img/electricity-pricing-600.webp 600w, img/electricity-pricing-1200.webp 1200w" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 45vw, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Line chart: cumulative net settlement of a 1 MW, 4 MWh battery in New York City through 2025 under no trading, deterministic forecast, risk-neutral, CVaR and perfect-foresight policies."></a><figcaption>Battery settlement in 2025 under five policies (archived output, revision 88d244d).</figcaption></figure>
+<p class="meta">Optimization · 2026</p>
+<h3>Electricity Clearing and Pricing</h3>
+<p>On a FERC two-unit example, convex-hull pricing cuts out-of-market side payments by 78% with the same dispatch.</p>
+<ul class="tags" aria-label="Methods"><li>unit commitment</li><li>convex hull pricing</li><li>Dantzig–Wolfe</li><li>energy storage</li><li>Python</li></ul>
+<details><summary>Problem, results and limits</summary><dl class="wu">
+<dt>Problem</dt><dd>Power plants with start-up costs and minimum outputs cannot be paid by one price per hour, so markets add side payments (uplift) charged back to consumers. How much uplift is paid depends on the pricing rule.</dd>
+<dt>Results</dt><dd><ul><li>FERC staff case: marginal pricing posts $90/MWh at the peak with $1,690 uplift; convex-hull pricing posts $276/MWh with $365.</li><li>The two hull constructions agree to 2.6 × 10⁻¹⁶ on 104 feasible random systems; omitting congestion gives a wrong bound with no warning.</li><li>A 1 MW, 4 MWh battery in New York City in 2025 would have netted about $41,000, 22% of the perfect-foresight $190,720 (archived output, not re-run).</li></ul></dd>
+<dt>Limits</dt><dd>Small systems; compares pricing rules, does not run a market.</dd>
+<dt>Contribution</dt><dd>Independent project: models, decomposition, settlement checks.</dd>
+</dl>
+<details class="method"><summary>Method</summary><p>Exact unit-commitment and pricing models on small systems: locational marginal, convex-hull and average-incremental-cost prices, with the hull computed two ways and by Dantzig–Wolfe column generation, checked against each other and against published cases.</p></details></details>
+<p class="links"><a href="https://github.com/symonyeal/Electricity-Clearing-and-Pricing" class="btn" rel="noopener">Repository</a></p>
+</li><li class="card" data-subject="Optimization">
+<figure class="fig formula"><div class="eq" role="img" aria-label="F1: mean–variance with at most K holdings (Chang et al., 2000).">min λ wᵀΣw − (1 − λ) μᵀw  s.t.  1ᵀw = 1,  εᵢzᵢ ≤ wᵢ ≤ δᵢzᵢ,  1ᵀz = K,  z ∈ {0,1}ᴺ</div><figcaption>F1: mean–variance with at most K holdings (Chang et al., 2000).</figcaption></figure>
+<p class="meta">Optimization · 2026</p>
+<h3>Sparse Portfolio Optimization</h3>
+<p>Cardinality-constrained portfolio models built and certified on public benchmarks; the empirical test awaits a licensed database.</p>
+<ul class="tags" aria-label="Methods"><li>mixed-integer programming</li><li>portfolio optimization</li><li>CVaR</li><li>Python</li></ul>
+<details><summary>Problem, results and limits</summary><dl class="wu">
+<dt>Problem</dt><dd>Does choosing a few stocks by optimization, rather than at random, lower the chance of trailing the market or Treasury bills, given that a few percent of firms account for all net stock-market gains?</dd>
+<dt>Results</dt><dd><ul><li>On OR-Library data, solver values agree with independent recomputation (CVaR to 4 × 10⁻¹⁷); one frontier comparison misses its 5 × 10⁻¹¹ tolerance and is reported as a failure.</li><li>No investment result yet: the test needs CRSP data that includes delisted firms, to avoid survivorship bias.</li></ul></dd>
+<dt>Limits</dt><dd>OR-Library universes contain survivors only and validate computation, not strategy.</dd>
+<dt>Contribution</dt><dd>Independent project: formulations, certificates and pre-registered test plan.</dd>
+</dl>
+<details class="method"><summary>Method</summary><p>Six formulations (mean–variance and its perspective reformulation, absolute deviation, CVaR, index tracking, a third-moment model), each solved by an open-source solver and checked independently: cutting-plane bounds, KKT conditions, recomputation from returns.</p></details></details>
+<p class="links"><a href="https://github.com/symonyeal/Sparse-Portfolio-Optimization" class="btn" rel="noopener">Repository</a></p>
+</li><li class="card" data-subject="Simulation and games">
+<figure class="fig"><a href="img/ball-knowledge-1200.webp" title="Open full size"><img src="img/ball-knowledge-1200.webp" srcset="img/ball-knowledge-600.webp 600w, img/ball-knowledge-1200.webp 1200w" sizes="(min-width: 60rem) 22rem, (min-width: 40rem) 45vw, 100vw" width="1200" height="800" loading="lazy" decoding="async" alt="Start screen of the game: the title “Greatness. Across eras.”, three player cards and tiles for the Career, Era Gauntlet, Weekly and Clubhouse modes."></a><figcaption>Start screen.</figcaption></figure>
+<p class="meta">Simulation and games · 2026</p>
+<h3>Ball Knowledge</h3>
+<p>A browser game: draft fifteen players from eight decades of club football under a salary cap, then play your club’s real domestic league.</p>
+<ul class="tags" aria-label="Methods"><li>simulation</li><li>JavaScript</li><li>data pipeline</li><li>Wikidata</li></ul>
+<details><summary>Problem, results and limits</summary><dl class="wu">
+<dt>Problem</dt><dd>A draft game across football eras must compare players from different decades on one scale and simulate plausible matches without a server.</dd>
+<dt>Results</dt><dd><ul><li>The match model was fitted to club results from 2014–2019 and checked on 2020–2023.</li><li>Runs entirely in the browser with bundled data; no account or install.</li></ul></dd>
+<dt>Limits</dt><dd>Era adjustments, manager grades and chemistry are declared game rules, not measurements; 1950s–1970s ratings are almost entirely estimated.</dd>
+<dt>Contribution</dt><dd>Independent project: game design, data pipeline, match model and interface.</dd>
+</dl>
+<details class="method"><summary>Method</summary><p>52,976 club-era cards for 25,382 players from 268 clubs, rated from EA FIFA/FC and Championship Manager data or estimated where those are missing. A match model compares attack, midfield, defence and goalkeeper to set expected goals.</p></details></details>
+<p class="links"><a href="https://symonyeal.github.io/Ball-Knowledge/" class="btn" rel="noopener">Play in the browser</a><a href="https://github.com/symonyeal/Ball-Knowledge" rel="noopener">Repository</a></p>
+</li></ul>
+</section>
+
+<section id="experience" class="wrap" aria-labelledby="exp-h">
+<h2 id="exp-h">Experience</h2>
+<ul class="timeline"><li><span class="when">Oct 2024 – Mar 2025</span><span><strong>Compensation Analyst, Alternative Payment Program</strong>, Ministry of Health, British Columbia</span></li><li><span class="when">May 2023 – Apr 2024</span><span><strong>Co-op Level II, Compensation Policy &amp; Programs, HSWBS</strong>, Ministry of Health, British Columbia</span></li><li><span class="when">Sep 2021 – Apr 2024</span><span><strong>Graduate Research and Teaching Assistant</strong>, Simon Fraser University</span></li><li><span class="when">Nov 2020 – Sep 2021</span><span><strong>Training Assistant, Office of Antiterrorism Assistance, U.S. Department of State</strong>, Antiterrorism Assistance Program (ATA)</span></li></ul>
+<h3>Education</h3>
+<ul class="timeline"><li><span class="when">Sep 2021 – Dec 2024</span><span><strong>MSc in Mathematics (Operations Research)</strong>, Simon Fraser University</span></li><li><span class="when">Aug 2015 – May 2019</span><span><strong>BSc in Mathematics (minor in Film Studies)</strong>, Washington and Lee University</span></li></ul>
+<p class="links"><a href="resume.html" class="btn">Full résumé</a><a href="Saimon-Islam-Resume.pdf">Download PDF</a></p>
+</section>
+
+<section id="contact" class="wrap" aria-labelledby="contact-h">
+<h2 id="contact-h">Contact</h2>
+<p>I welcome questions about the projects, research collaboration and roles in operations research or data science.</p>
+<ul class="contact">
+<li><span>Email</span><a href="mailto:symonyeal@gmail.com">symonyeal@gmail.com</a></li>
+<li><span>LinkedIn</span><a href="https://www.linkedin.com/in/saimon-islam-b9291292" rel="noopener">linkedin.com/in/saimon-islam-b9291292</a></li>
+<li><span>GitHub</span><a href="https://github.com/symonyeal" rel="noopener">github.com/symonyeal</a></li>
+</ul>
+</section>
+</main>
+<script src="assets/filter.js" defer></script>
+<footer class="foot"><div class="wrap">
+<p>Saimon Islam · <a href="https://github.com/symonyeal" rel="noopener">GitHub</a> · <a href="https://www.linkedin.com/in/saimon-islam-b9291292" rel="noopener">LinkedIn</a> · <a href="mailto:symonyeal@gmail.com">symonyeal@gmail.com</a></p>
+<p>Static site; source at <a href="https://github.com/symonyeal/symonyeal.github.io" rel="noopener">symonyeal.github.io</a>.</p>
+</div></footer>
+</body>
+</html>

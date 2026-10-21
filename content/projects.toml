@@ -1,0 +1,204 @@
+# One [[project]] per repository, in display order. Every number is copied from the
+# repository's README or site; each entry names where it came from in `source`.
+#
+# Fields
+#   slug        anchor id and image stem: site/img/<slug>-1200.webp and -600.webp (3:2)
+#   subject     one of SUBJECTS in build.py; the gallery filter
+#   featured    true puts the project under "Selected work" with its full write-up
+#   headline    the finding, in one sentence (answer first)
+#   problem, approach, results, limits   the write-up; results is a list
+#   contribution  what the author did
+#   formula     shown instead of a figure when a project has none
+#   links       [label, url] pairs; the first is the primary action
+
+[[project]]
+slug = "electric-fleet"
+title = "Electric Fleet Optimization"
+year = "2026"
+subject = "Optimization"
+featured = true
+headline = "Proves the optimal routes for two instances of a public electric-vehicle routing benchmark; on one, the published value was not optimal."
+problem = "Electric vans and buses have limited range, so a plan must decide when and where each vehicle recharges as well as where it goes. The IEEE WCCI-2020 benchmark for electric-vehicle routing published best-known values that were never proven optimal, and no method reported a lower bound."
+approach = "A mixed-integer model on a station-path multigraph, bounded by a set-partitioning linear program solved by column generation with interior-point duals. Every reported plan is replayed, and every bound passes a schema check, so each instance is labelled certified, bracketed or open. The same core sizes buses and chargers for TransLink’s Route 100 timetable (219 trips a day)."
+results = [
+  "E-n22-k4 and E-n23-k3 certified optimal. On E-n23-k3 the optimum, 571.95, is shorter than the published 573.13.",
+  "E-n30-k3 bracketed within 0.191%: a route shorter than the published one, and a proof that none is more than 0.2% shorter.",
+  "Route 100: ignoring battery limits, 16 buses cover the timetable.",
+]
+limits = "One depot, identical vehicles, no time windows or driver shifts. Four of the seven benchmark instances remain open, and the full-day bus result with batteries and BC Hydro prices has not yet been computed. It is not TransLink’s operating plan."
+contribution = "Independent project: formulation, algorithms, validation and documentation."
+tags = ["mixed-integer programming", "column generation", "interior-point methods", "Python"]
+image_alt = "Four routes leaving one depot on benchmark instance E-n22-k4, with charging stations marked as triangles: the replayed solution of length 384.678, certified optimal."
+caption = "E-n22-k4: the certified optimal routes (length 384.678)."
+links = [["Repository", "https://github.com/symonyeal/Electric-Fleet-Optimization"]]
+source = "README, Results table (code revisions 2533ebe, 474149b, 9c00dc3)"
+
+[[project]]
+slug = "supply-chain-cuts"
+title = "Supply Chain Cuts"
+year = "2026"
+subject = "Optimization"
+featured = true
+headline = "Five single-country losses, all in China, would each cut world lithium-ion cell output by a quarter or more over two years."
+problem = "Batteries and solar panels pass through mines, refineries and factories in many countries. Which losses of one country’s output, alone or with up to two others, would cut world production by at least 25% over 24 months, and how often might that happen?"
+approach = "A capacity network from mine to cell, built from 2024 production statistics and, where those are missing, export mass. A recourse linear program gives the least shortfall under each disruption. Minimal cut sets of up to three losses are enumerated three independent ways (an interdiction MILP built from the LP dual, a lattice search, exhaustive search), and their lists agree. Annual probability is bracketed by an exact lower bound plus a Monte Carlo residual."
+results = [
+  "Batteries: five single weak points (cells, cathode material, anode material, graphite, lithium carbonate), assuming plants can switch between LFP and NCM chemistries.",
+  "Solar: four single weak points (polysilicon, wafers, cells, modules).",
+  "If every export restriction recorded since 2012 were a complete shutdown, such a shortfall would occur in about 29% of years for batteries and 24% for solar. These are stress scenarios, not forecasts.",
+]
+limits = "Much capacity outside China is estimated from export volumes. No plant locations are modelled, so natural hazards are a scenario only. Recorded export restrictions fail the predictive test."
+contribution = "Independent project: model, enumeration methods, data reconciliation, validation and interactive site."
+tags = ["network interdiction", "linear programming", "Monte Carlo", "supply-chain risk", "Python"]
+image_alt = "Bar chart from the project site: each layer of the lithium-ion chain, from anode material to refined nickel, with 2024 supply in years of annual requirement on a log scale, coloured by whether the figure comes from production statistics, trade data or imputation."
+caption = "Supply of each layer in years of requirement; a single loss can cut only the layers near the dashed line."
+links = [["Interactive site", "https://symonyeal.github.io/Supply-Chain-Cuts/"], ["Repository", "https://github.com/symonyeal/Supply-Chain-Cuts"]]
+source = "README, In plain terms and Answer; site v0.3.0"
+
+[[project]]
+slug = "supplier-panels"
+title = "Resilient Supplier Panels"
+year = "2026"
+subject = "Optimization"
+featured = true
+headline = "In 30 of 40 sampled USDA food baskets, no choice of suppliers survives the loss of any one supplier, and in each case a single product is the cause."
+problem = "The USDA approves vendors for specific products before they may bid on its food purchases. A buyer wants a panel of suppliers that still covers every product in a basket after any one supplier fails. How small can it be, how many exist, and which suppliers cannot be replaced?"
+approach = "Resilient panels are the minimal transversals of a scenario hypergraph. A MILP finds the smallest panel (median 0.8 ms). Berge’s method and FK-B, from the author’s MSc thesis code, enumerate every minimal panel. Separate code certifies each panel against the USDA list, and a second MILP certifies that none is missing."
+results = [
+  "30 of 40 baskets have no resilient panel; each contains a product with only one approved supplier. Approving a second supplier, not choosing differently, fixes it.",
+  "In the other 10 baskets, 2 to 6 suppliers cover every product after any single failure.",
+  "Canned-goods example: 21 approved suppliers, a smallest panel of 2, and 1,284 certified minimal panels.",
+]
+limits = "Approvals only: not capacity, price, delivery record or shared ownership. One data snapshot (2026-10-15). Research, not a purchasing recommendation."
+contribution = "Independent project: model, solver and enumeration pipeline, certificates and interactive site. Release 0.2.0."
+tags = ["hypergraph transversals", "integer programming", "enumeration", "Python"]
+image_alt = "Opening screen of the project site: the headline “30 of 40 sampled baskets cannot survive one supplier failure”, beside a lead case of three canned products with 21 eligible suppliers, a smallest resilient panel of 2 and 1,284 minimal alternatives."
+caption = "The project site opens with the answer and a worked basket."
+links = [["Interactive site", "https://symonyeal.github.io/Resilient-Supplier-Panels/"], ["Repository", "https://github.com/symonyeal/Resilient-Supplier-Panels"], ["Release 0.2.0", "https://github.com/symonyeal/Resilient-Supplier-Panels/releases/tag/v0.2.0"]]
+source = "README, The short answer and Three examples"
+
+[[project]]
+slug = "hypergraph-dualization"
+title = "Hypergraph Dualization (MSc thesis)"
+year = "2023–2024"
+subject = "Discrete mathematics"
+featured = true
+headline = "Both Fredman–Khachiyan algorithms on one model, checked by an independent oracle; a search for hard inputs found one in the Witt design S(4,5,11)."
+problem = "Given two hypergraphs, decide whether each is the transversal hypergraph of the other: list every minimal way to meet all of a family of sets, and prove the list complete. Whether this can be done in polynomial time is open. Fredman and Khachiyan’s algorithms FK-A and FK-B run in quasi-polynomial time, but FK-A slows on highly symmetric families."
+approach = "The thesis analyses symmetry in clique hypergraphs and their transversals, shows that the FK-A decomposition induces a minor map on the underlying graph, and characterizes hypergraphs that FK-A struggles with. The repository implements FK-A and FK-B on one bitset model, draws their recursion trees side by side, and checks every answer against an independent transversal oracle."
+results = [
+  "FK-A and FK-B agree on every instance, and the oracle confirms every answer. The test suite (457 passing) reproduces the thesis’s published recursion trees.",
+  "A search for new hard instances found one built from the Witt design S(4,5,11).",
+  "Counting distinct subproblems rather than tree nodes, none of the published hard instances is hard for the recursion itself.",
+]
+limits = "Small instances; whether dualization is solvable in polynomial time remains open."
+contribution = "MSc thesis, Simon Fraser University, 2024 (senior supervisor: Tamon Stephen). The maintained Python implementation; the legacy implementation credits Saimon Islam and Lacey Liang."
+tags = ["hypergraphs", "monotone Boolean functions", "automorphism groups", "Python", "SageMath"]
+image_alt = "Interactive report of the FK-A recursion on the Fano plane: a tree of 59 subproblem nodes, each labelled with the sizes of its two hypergraphs, beside a panel showing the root’s automorphism group PSL(3,2) of order 168."
+caption = "FK-A on the Fano plane: 59 nodes, 30 leaves; automorphism group PSL(3,2)."
+links = [["Thesis (PDF)", "https://github.com/symonyeal/Hypergraph-Dualization/blob/main/Saimon%20Islam%20Manuscript%20MSc%20Thesis%20(1).pdf"], ["Repository", "https://github.com/symonyeal/Hypergraph-Dualization"], ["Run in Binder", "https://mybinder.org/v2/gh/symonyeal/Hypergraph-Dualization/main?urlpath=lab"]]
+source = "Thesis abstract; README, In plain terms and Start here"
+
+[[project]]
+slug = "mma-rankings"
+title = "MMA Career Rankings"
+year = "2026"
+subject = "Applied statistics"
+featured = true
+headline = "One rating model of 81,616 professional fights ranks 34,147 fighters by career, peak and current form, on a scale adjusted for era."
+problem = "Ranking fighters across three decades and many promotions: rating scales drift upward over time, promotions differ in depth, and a short unbeaten record can look better than a long elite career."
+approach = "Whole-History Rating (Coulom, 2008) fitted to every career at once, so later results revalue earlier wins. Each year is read against its division’s contender line; promotion weights are shrunk toward the average where evidence is thin; titles, contender wins and skill are square-rooted on a common scale before weighting."
+results = [
+  "81,616 rated fights and 34,147 rated fighters; whole-career coverage for 1,826 of 1,837 eligible fighters (99.4%).",
+  "Published boards for all-time, prime and current form, by weight class, for men and women.",
+  "The site lets a reader change the score’s weights and see the order change, and checks forecast calibration against outcomes.",
+]
+limits = "Not yet shown to predict fights better than a simpler rating; that test is open. Promotion labels are missing from 54% of rated fights."
+contribution = "Independent project: rating model, data assembly, release checks and interactive site."
+tags = ["rating systems", "Bayesian inference", "paired comparison", "data visualization", "Python"]
+image_alt = "Chart from the project site: era-adjusted rating at each bout for Jon Jones, Georges St-Pierre and Islam Makhachev, 2002 to 2026, with peaks labelled."
+caption = "Era-adjusted rating at each bout, three careers compared."
+links = [["Interactive site", "https://symonyeal.github.io/MMA-Career-Rankings/"], ["Repository", "https://github.com/symonyeal/MMA-Career-Rankings"]]
+source = "README, In plain terms and release facts (dataset 2026-10-14)"
+
+[[project]]
+slug = "renter-cost-burden"
+title = "Renter Cost Burden"
+year = "2026"
+subject = "Applied statistics"
+headline = "Half of renter households in 30 large counties were rent-burdened in both 2011 and 2024; the change is within survey error, and next year’s share cannot be forecast."
+problem = "Did renter incomes keep up with rent in the 30 largest counties of Colorado, Massachusetts and Washington from 2011 to 2024, and did job growth make renters worse off?"
+approach = "Census and BLS data, inflation-adjusted. Every change is compared with its Census 90% margin. Forecasts use only figures published by each forecast date, with 2023–2024 held back and registered before scoring."
+results = [
+  "51.2% of renter households spent 30% or more of income on rent and utilities in 2011 and 51.9% in 2024, inside the ±1.0-point margin.",
+  "In the median county, rent rose 33% and renter income 32%; seven counties changed by more than the survey can miss.",
+  "Carrying last year’s value forward (error 2.85 points) beat a regression (3.60) and boosted trees (3.12).",
+]
+limits = "Thirty large counties in three states; associations, not causes."
+contribution = "Independent project: data pipeline, estimation, forecast tests and site."
+tags = ["survey statistics", "forecasting", "American Community Survey", "Python"]
+image_alt = "Opening of the project site: headline figures beside a line chart of the share of renter households paying 30% or more of income, 2011 to 2024, with a shaded survey-margin band."
+caption = "Share of renters paying 30% or more, with the Census 90% margin."
+links = [["Interactive site", "https://symonyeal.github.io/Renter-Cost-Burden/"], ["Repository", "https://github.com/symonyeal/Renter-Cost-Burden"]]
+source = "README, What the data shows"
+
+[[project]]
+slug = "electricity-pricing"
+title = "Electricity Clearing and Pricing"
+year = "2026"
+subject = "Optimization"
+headline = "On a FERC two-unit example, convex-hull pricing cuts out-of-market side payments by 78% with the same dispatch."
+problem = "Power plants with start-up costs and minimum outputs cannot be paid by one price per hour, so markets add side payments (uplift) charged back to consumers. How much uplift is paid depends on the pricing rule."
+approach = "Exact unit-commitment and pricing models on small systems: locational marginal, convex-hull and average-incremental-cost prices, with the hull computed two ways and by Dantzig–Wolfe column generation, checked against each other and against published cases."
+results = [
+  "FERC staff case: marginal pricing posts $90/MWh at the peak with $1,690 uplift; convex-hull pricing posts $276/MWh with $365.",
+  "The two hull constructions agree to 2.6 × 10⁻¹⁶ on 104 feasible random systems; omitting congestion gives a wrong bound with no warning.",
+  "A 1 MW, 4 MWh battery in New York City in 2025 would have netted about $41,000, 22% of the perfect-foresight $190,720 (archived output, not re-run).",
+]
+limits = "Small systems; compares pricing rules, does not run a market."
+contribution = "Independent project: models, decomposition, settlement checks."
+tags = ["unit commitment", "convex hull pricing", "Dantzig–Wolfe", "energy storage", "Python"]
+image_alt = "Line chart: cumulative net settlement of a 1 MW, 4 MWh battery in New York City through 2025 under no trading, deterministic forecast, risk-neutral, CVaR and perfect-foresight policies."
+caption = "Battery settlement in 2025 under five policies (archived output, revision 88d244d)."
+links = [["Repository", "https://github.com/symonyeal/Electricity-Clearing-and-Pricing"]]
+source = "README, In plain terms and What it shows"
+
+[[project]]
+slug = "sparse-portfolio"
+title = "Sparse Portfolio Optimization"
+year = "2026"
+subject = "Optimization"
+headline = "Cardinality-constrained portfolio models built and certified on public benchmarks; the empirical test awaits a licensed database."
+problem = "Does choosing a few stocks by optimization, rather than at random, lower the chance of trailing the market or Treasury bills, given that a few percent of firms account for all net stock-market gains?"
+approach = "Six formulations (mean–variance and its perspective reformulation, absolute deviation, CVaR, index tracking, a third-moment model), each solved by an open-source solver and checked independently: cutting-plane bounds, KKT conditions, recomputation from returns."
+results = [
+  "On OR-Library data, solver values agree with independent recomputation (CVaR to 4 × 10⁻¹⁷); one frontier comparison misses its 5 × 10⁻¹¹ tolerance and is reported as a failure.",
+  "No investment result yet: the test needs CRSP data that includes delisted firms, to avoid survivorship bias.",
+]
+limits = "OR-Library universes contain survivors only and validate computation, not strategy."
+contribution = "Independent project: formulations, certificates and pre-registered test plan."
+tags = ["mixed-integer programming", "portfolio optimization", "CVaR", "Python"]
+formula = "min λ wᵀΣw − (1 − λ) μᵀw  s.t.  1ᵀw = 1,  εᵢzᵢ ≤ wᵢ ≤ δᵢzᵢ,  1ᵀz = K,  z ∈ {0,1}ᴺ"
+caption = "F1: mean–variance with at most K holdings (Chang et al., 2000)."
+links = [["Repository", "https://github.com/symonyeal/Sparse-Portfolio-Optimization"]]
+source = "README, Status; docs/MODEL.md §3; docs/results"
+
+[[project]]
+slug = "ball-knowledge"
+title = "Ball Knowledge"
+year = "2026"
+subject = "Simulation and games"
+headline = "A browser game: draft fifteen players from eight decades of club football under a salary cap, then play your club’s real domestic league."
+problem = "A draft game across football eras must compare players from different decades on one scale and simulate plausible matches without a server."
+approach = "52,976 club-era cards for 25,382 players from 268 clubs, rated from EA FIFA/FC and Championship Manager data or estimated where those are missing. A match model compares attack, midfield, defence and goalkeeper to set expected goals."
+results = [
+  "The match model was fitted to club results from 2014–2019 and checked on 2020–2023.",
+  "Runs entirely in the browser with bundled data; no account or install.",
+]
+limits = "Era adjustments, manager grades and chemistry are declared game rules, not measurements; 1950s–1970s ratings are almost entirely estimated."
+contribution = "Independent project: game design, data pipeline, match model and interface."
+tags = ["simulation", "JavaScript", "data pipeline", "Wikidata"]
+image_alt = "Start screen of the game: the title “Greatness. Across eras.”, three player cards and tiles for the Career, Era Gauntlet, Weekly and Clubhouse modes."
+caption = "Start screen."
+links = [["Play in the browser", "https://symonyeal.github.io/Ball-Knowledge/"], ["Repository", "https://github.com/symonyeal/Ball-Knowledge"]]
+source = "README, Ball Knowledge and The historical archive is uneven"
