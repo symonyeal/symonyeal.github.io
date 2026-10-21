@@ -50,4 +50,4 @@ python qa/browser.py --external      # with the local server running
 
 GitHub Actions runs the first two on every push; `pages.yml` publishes `site/`.
 
-Code: MIT. Text, résumé and figures: © Saimon Islam. Source Serif 4: SIL Open Font License (`site/assets/fonts/OFL.txt`).
+Code: MIT. Text, résumé and figures: © Saimon Islam. Fonts (Source Serif 4, Space Grotesk, JetBrains Mono): SIL Open Font License (`site/assets/fonts/OFL.txt`).
