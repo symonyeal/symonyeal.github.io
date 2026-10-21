@@ -1,0 +1,16 @@
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
+
+[tool.ruff]
+line-length = 130
+
+[tool.ruff.lint]
+extend-select = ["E501"]
+# E401/E731: one-line imports and lambdas are the house register.
+ignore = ["E741", "I001", "E401", "E731", "E701", "E702"]
+
+[tool.ruff.lint.per-file-ignores]
+# HTML template lines read better whole than split.
+"build.py" = ["E501"]

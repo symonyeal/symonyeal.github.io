@@ -1,0 +1,31 @@
+# Who, what, and how to reach. Every statement here is supported by the résumé or a public repository.
+
+name = "Saimon Islam"
+role = "Operations research and data analysis"
+location = "Vancouver, BC"
+email = "symonyeal@gmail.com"
+github = "https://github.com/symonyeal"
+linkedin = "https://www.linkedin.com/in/saimon-islam-b9291292"
+site = "https://symonyeal.github.io/"
+
+# The governing thought: one sentence, then the paragraphs that support it.
+lead = "I build optimization and statistical models that report how far each answer can be trusted."
+
+intro = [
+  "I am a mathematician working in operations research and data analysis. My MSc in Mathematics at Simon Fraser University studied how symmetry affects the Fredman–Khachiyan algorithm for hypergraph dualization. From 2023 to 2025 I worked in compensation policy and analysis at the British Columbia Ministry of Health, on anesthesia contracts across 30 sites.",
+  "My public projects apply the same discipline to routing, supply chains, electricity markets, housing and sport. Each reported answer comes with its evidence: a lower bound beside a plan, a survey margin beside a change, an independent check beside a solver. Each also states what it does not show.",
+]
+
+# Proof points shown under the introduction.
+facts = [
+  ["MSc Mathematics (Operations Research)", "Simon Fraser University, 2024"],
+  ["Compensation analyst", "BC Ministry of Health, 2023–2025"],
+  ["9 public research repositories", "5 with interactive sites"],
+]
+
+# What I work on: three areas that do not overlap.
+areas = [
+  ["Optimization", "Mixed-integer and convex models with certificates: column generation, interior-point methods, network interdiction, enumeration."],
+  ["Applied statistics", "Estimation that respects sampling error, forecasts tested out of sample, and paired-comparison rating models."],
+  ["Discrete mathematics", "Hypergraph transversals, monotone Boolean duality and the role of symmetry in recursive algorithms."],
+]
