@@ -6,6 +6,7 @@
 The pages are a function of the content files alone, so `tests/` can rebuild and compare.
 """
 import sys, tomllib
+from math import cos, sin, pi
 from html import escape as e
 from pathlib import Path
 
@@ -49,6 +50,7 @@ def head(title, desc, path):
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preload" href="assets/fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -92,7 +94,7 @@ def writeup(p, results=True):
     res = "".join(f"<li>{e(r)}</li>" for r in p["results"])
     return f"""<dl class="wu">
 <dt>Problem</dt><dd>{e(p['problem'])}</dd>
-{f'<dt>Results</dt><dd><ul>{res}</ul></dd>' if results else ''}
+{f'<dt>Results</dt><dd class="res"><ul>{res}</ul></dd>' if results else ''}
 <dt>Limits</dt><dd>{e(p['limits'])}</dd>
 <dt>Contribution</dt><dd>{e(p['contribution'])}</dd>
 </dl>
@@ -103,12 +105,13 @@ def meta(p):
     return f'<p class="meta">{e(p["subject"])} · {e(p["year"])}</p>'
 
 
-def feature(p):
-    return f"""<article class="feature" id="{p['slug']}">
+def feature(p, flip):
+    return f"""<article class="feature{' flip' if flip else ''}" id="{p['slug']}" data-subject="{e(p['subject'])}">
 {figure(p, "(min-width: 60rem) 34rem, 100vw")}
 <div class="body">
 {meta(p)}
 <h3>{e(p['title'])}</h3>
+<p class="stat"><b>{e(p['stat'][0])}</b><span>{e(p['stat'][1])}</span></p>
 <p class="headline">{e(p['headline'])}</p>
 {writeup(p)}
 {links(p)}
@@ -131,9 +134,24 @@ def card(p):
 </li>"""
 
 
+def fano(R=100):
+    """The Fano plane PG(2,2): 7 points, 7 lines (3 sides, 3 medians, the incircle), Aut = PSL(3,2)."""
+    V = [(R*cos(t), R*sin(t)) for t in (-pi/2, pi/6, 5*pi/6)]
+    M = [((V[(i+1) % 3][0] + V[(i+2) % 3][0])/2, (V[(i+1) % 3][1] + V[(i+2) % 3][1])/2) for i in range(3)]  # M_i opposite V_i
+    L = ([(V[(i+1) % 3], V[(i+2) % 3]) for i in range(3)] + [(V[i], M[i]) for i in range(3)])
+    h = [0, 1, 2, 3, 0, 1]
+    seg = "".join(f'<line class="h{h[k]}" x1="{a[0]:.1f}" y1="{a[1]:.1f}" x2="{b[0]:.1f}" y2="{b[1]:.1f}"/>' for k, (a, b) in enumerate(L))
+    pts = "".join(f'<circle class="p" cx="{x:.1f}" cy="{y:.1f}" r="7"/>' for x, y in V + M + [(0, 0)])
+    return (f'<figure class="mark"><svg viewBox="-112 -112 224 178" role="img" aria-label="The Fano plane: seven points and seven lines">'
+            f'<circle class="l h2" cx="0" cy="0" r="{R/2:.1f}"/>{seg}{pts}</svg>'
+            '<figcaption>The Fano plane PG(2,2): 7 points, 7 lines, automorphism group PSL(3,2) of order 168. '
+            'The thesis traces its symmetry through FK-A.</figcaption></figure>')
+
+
 def index():
     facts = "".join(f"<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>" for k, v in P["facts"])
-    areas = "".join(f"<div><h3>{e(k)}</h3><p>{e(v)}</p></div>" for k, v in P["areas"])
+    areas = "".join(f'<a class="tile" href="#projects" data-subject="{e(k)}" data-filter="{e(k)}"><h3>{e(k)}</h3><p>{e(v)}</p>'
+                    f'<span>{sum(p["subject"] == k for p in PR)} projects →</span></a>' for k, v in P["areas"])
     intro = "".join(f"<p>{e(x)}</p>" for x in P["intro"])
     subj = [s for s in SUBJECTS if any(p["subject"] == s for p in PR)]
     assert all(p["subject"] in SUBJECTS for p in PR), "unknown subject"
@@ -144,7 +162,8 @@ def index():
                   for x in CV["education"])
     desc = f"{P['name']}: {P['role'].lower()}. {P['lead']}"
     return head(f"{P['name']} · {P['role']}", desc, "") + f"""<main id="main">
-<section class="hero wrap{' has-photo' if P['photo'] else ''}" aria-labelledby="name">
+<section class="hero band" aria-labelledby="name"><div class="wrap">
+<div>
 {f'<img class="photo" src="{e(P["photo"])}" width="600" height="600" alt="Portrait of {e(P["name"])}">' if P['photo'] else ''}
 <h1 id="name">{e(P['name'])}</h1>
 <p class="role">{e(P['role'])} · {e(P['location'])}</p>
@@ -153,35 +172,37 @@ def index():
 <div class="intro">{intro}</div>
 <dl class="facts">{facts}</dl>
 <p class="links">{a('resume.html', 'Résumé', 'btn')}{a(PDF, 'Download PDF')}{a(P['github'], 'GitHub')}{a(P['linkedin'], 'LinkedIn')}{a('mailto:' + P['email'], 'Email')}</p>
-</section>
+</div>
+{fano()}
+</div></section>
 
-<section class="areas wrap" aria-labelledby="areas-h">
+<section class="areas wrap num" aria-labelledby="areas-h">
 <h2 id="areas-h">What I work on</h2>
 <div class="cols">{areas}</div>
 </section>
 
-<section id="work" class="wrap" aria-labelledby="work-h">
+<section id="work" class="wrap num" aria-labelledby="work-h">
 <h2 id="work-h">Selected work</h2>
 <p class="note">Each summary leads with the finding, then states the problem, the method, the results and what the work does not show. Numbers are taken from the project’s repository.</p>
-{''.join(feature(p) for p in PR if p.get('featured'))}
+{''.join(feature(p, k % 2) for k, p in enumerate(p for p in PR if p.get('featured')))}
 </section>
 
-<section id="projects" class="wrap" aria-labelledby="projects-h">
+<section id="projects" class="wrap num" aria-labelledby="projects-h">
 <h2 id="projects-h">All projects</h2>
 <div class="filter" role="group" aria-label="Filter by subject" hidden><button type="button" aria-pressed="true" data-subject="">All</button>{filt}</div>
 <p class="count" aria-live="polite"></p>
 <ul class="grid">{''.join(card(p) for p in PR)}</ul>
 </section>
 
-<section id="experience" class="wrap" aria-labelledby="exp-h">
+<section id="experience" class="wrap num" aria-labelledby="exp-h">
 <h2 id="exp-h">Experience</h2>
 <ul class="timeline">{jobs}</ul>
 <h3>Education</h3>
-<ul class="timeline">{eds}</ul>
+<ul class="timeline ed">{eds}</ul>
 <p class="links">{a('resume.html', 'Full résumé', 'btn')}{a(PDF, 'Download PDF')}</p>
 </section>
 
-<section id="contact" class="wrap" aria-labelledby="contact-h">
+<section id="contact" class="band" aria-labelledby="contact-h"><div class="wrap">
 <h2 id="contact-h">Contact</h2>
 <p>I welcome questions about the projects, research collaboration and roles in operations research or data science.</p>
 <ul class="contact">
@@ -189,7 +210,7 @@ def index():
 <li><span>LinkedIn</span>{a(P['linkedin'], 'linkedin.com/in/saimon-islam-b9291292')}</li>
 <li><span>GitHub</span>{a(P['github'], 'github.com/symonyeal')}</li>
 </ul>
-</section>
+</div></section>
 </main>
 <script src="assets/filter.js" defer></script>
 """ + foot()
@@ -235,13 +256,13 @@ def resume():
 def og():
     """The 1200×627 link-preview card, rendered by Edge."""
     return f"""<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="assets/style.css">
-<style>body{{margin:0;width:1200px;height:627px;display:grid;grid-template-columns:1fr 560px;align-items:center;background:var(--bg)}}
+<style>body{{margin:0;width:1200px;height:627px;display:grid;grid-template-columns:1fr 470px;align-items:center;background:var(--band);color:var(--band-ink)}}
 .t{{padding:0 0 0 72px}}h1{{font-size:66px;margin:0 0 6px}}p{{margin:0 0 22px;max-width:24ch}}
-.r{{font:24px var(--sans);color:var(--muted)}}.l{{font-size:31px;line-height:1.35}}.u{{font:20px var(--sans);color:var(--accent)}}
-img{{width:520px;border:1px solid var(--rule);border-radius:6px}}</style></head>
+.r{{font:22px var(--mono);color:var(--band-muted)}}.l{{font:32px/1.3 var(--display)}}.u{{font:20px var(--mono);color:#8aa4ff}}
+.mark{{width:400px}}.mark figcaption{{display:none}}</style></head>
 <body><div class="t"><h1>{e(P['name'])}</h1><p class="r">{e(P['role'])}</p><p class="l">{e(P['lead'])}</p>
 <p class="u">symonyeal.github.io</p></div>
-<img src="img/supply-chain-cuts-1200.webp" alt=""></body></html>"""
+{fano()}</body></html>"""
 
 
 def render():
@@ -249,7 +270,7 @@ def render():
     (SITE / "_og.html").write_text(og(), encoding="utf-8")
     with sync_playwright() as pw:
         b = pw.chromium.launch(channel="msedge")
-        pg = b.new_page(viewport={"width": 1200, "height": 627}, color_scheme="light")
+        pg = b.new_page(viewport={"width": 1200, "height": 627}, color_scheme="light", reduced_motion="reduce")
         pg.goto((SITE / "_og.html").as_uri()); pg.wait_for_timeout(300)
         pg.screenshot(path=SITE / "og.png")
         pg.goto((SITE / "resume.html").as_uri()); pg.emulate_media(media="print"); pg.wait_for_timeout(300)
