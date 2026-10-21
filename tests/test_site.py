@@ -51,8 +51,6 @@ def test_every_project_is_complete():
         assert p["subject"] in build.SUBJECTS
         assert p["links"] and all(u.startswith("https://") for _, u in p["links"])
         assert any("github.com/symonyeal/" in u for _, u in p["links"])
-        if "formula" not in p:
-            assert p["image_alt"] and all((SITE / "img" / f"{p['slug']}-{n}.webp").exists() for n in (600, 1200))
 
 
 def test_no_private_contact_detail():

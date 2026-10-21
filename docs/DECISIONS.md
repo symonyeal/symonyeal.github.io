@@ -65,6 +65,18 @@ Each entry: the decision, the alternatives, the reason, the date.
 - **Copy.** The slogan lead and the meta-sentences about how summaries are written are gone; the
   introduction states degree, thesis, employment and what the projects cover.
 
+## 2026-10-20, modern minimal (supersedes both redesigns above)
+
+- The owner rejected the plain serif version: cream and grey palette, muddy dark mode, bad
+  thumbnails, copy still machine-sounding. Chose "modern minimal sans" from offered options.
+- **White page, Inter, one blue link colour, no dark mode.** Inter: OFL, self-hosted latin subset
+  (48 kB), replacing Source Serif 4.
+- **No figures.** The figures were screenshots of nine different sites (cream backgrounds, clipped
+  text, one nearly blank tree) and cannot be made consistent by cropping. Projects are text cards
+  in a two-column grid. Consistent figures would need regenerating from each repository.
+- **Copy rewritten** in plain first person; each card says what the project is and what it found,
+  with the numbers unchanged from the sources.
+
 ## Open
 
 See [OPEN.md](OPEN.md).

@@ -4,7 +4,7 @@
     python qa/browser.py [base-url] [--external]
 
 Checks, at widths 360, 390, 768 and 1440 and in both colour schemes: no horizontal scroll; every
-nav target exists; project details open; the PDF link returns a PDF. --external
+nav target exists; the PDF link returns a PDF. --external
 also requests every outbound link. Screenshots go to qa/out/.
 """
 import sys, urllib.error, urllib.request
@@ -28,8 +28,6 @@ with sync_playwright() as pw:
             pg = b.new_page(viewport={"width": W, "height": H}, color_scheme=scheme)
             for page in ["", "resume.html"]:
                 pg.goto(base + page, wait_until="networkidle")
-                pg.evaluate("document.querySelectorAll('img[loading=lazy]').forEach(i => i.loading = 'eager')")
-                pg.wait_for_load_state("networkidle")
                 over = pg.evaluate("document.documentElement.scrollWidth - document.documentElement.clientWidth")
                 check(over <= 0, f"{W}px {scheme} /{page}: horizontal overflow {over}px")
                 if scheme == "light" or W in (390, 1440):
@@ -41,11 +39,8 @@ with sync_playwright() as pw:
     for h in pg.eval_on_selector_all(".top nav a", "as => as.map(a => a.getAttribute('href'))"):
         if "#" in h:
             check(pg.locator(h[h.index("#"):]).count() == 1, f"nav target {h}")
-    pg.locator("details summary").first.click()
-    check(pg.locator("details[open]").count() == 1, "project details open on tap")
     r = pg.request.get(base + "Saimon-Islam-Resume.pdf")
     check(r.ok and r.headers.get("content-type") == "application/pdf" and r.body()[:4] == b"%PDF", "résumé PDF downloads")
-    check(pg.locator("img:not([alt])").count() == 0, "every image has alt text")
     hrefs = sorted(set(pg.eval_on_selector_all("a[href^=http]", "as => as.map(a => a.href)")))
     b.close()
 

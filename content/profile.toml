@@ -14,6 +14,5 @@ photo = ""
 status = ""
 
 intro = [
-  "I am a mathematician working in operations research and data analysis. My MSc in Mathematics at Simon Fraser University, supervised by Tamon Stephen, studied how symmetry affects the Fredman–Khachiyan algorithm for hypergraph dualization. From 2023 to 2025 I worked on compensation policy and analysis at the British Columbia Ministry of Health, on anesthesia contracts across 30 sites.",
-  "Below are my independent projects in routing, supply chains, electricity markets, housing and sport. Each links to its code and data and states its limits.",
+  "I’m a mathematician in Vancouver working on optimization and applied statistics. I did my MSc in Mathematics at Simon Fraser University, with a thesis on the Fredman–Khachiyan algorithm for hypergraph dualization, then spent 2023 to 2025 as an analyst at the BC Ministry of Health.",
 ]
