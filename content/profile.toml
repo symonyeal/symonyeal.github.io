@@ -8,6 +8,11 @@ github = "https://github.com/symonyeal"
 linkedin = "https://www.linkedin.com/in/saimon-islam-b9291292"
 site = "https://symonyeal.github.io/"
 
+# Optional. photo: a square image under site/img/ (e.g. "img/portrait.webp", 600×600);
+# status: one line under the role, e.g. the LinkedIn headline. Empty strings show nothing.
+photo = ""
+status = ""
+
 # The governing thought: one sentence, then the paragraphs that support it.
 lead = "I build optimization and statistical models that report how far each answer can be trusted."
 

@@ -3,7 +3,7 @@
 # Edit here, then run `python build.py` (and `python build.py --pdf` for the PDF).
 
 summary = "Data scientist with 3+ years of experience in policy and data analysis and process optimization for governments, and in data modelling and programming for large-scale industrial, supply-chain, logistics and financial problems. Spearheaded a Power BI platform handling $200M in billing while improving efficiency by 20%. Proven record of cross-functional collaboration and actionable reporting solutions that accelerated decisions and efficiency measures."
-availability = "Willing to relocate"
+availability = "On valid work permit · Willing to relocate"
 
 [[experience]]
 org = "Ministry of Health, British Columbia"
@@ -12,7 +12,7 @@ title = "Compensation Analyst, Alternative Payment Program"
 dates = "Oct 2024 – Mar 2025"
 points = [
   "Conducted financial analysis on $200M in annualized anesthesia contracts, identifying outliers and data-quality issues via statistical analysis and quarterly utilization reviews across 30 sites.",
-  "Accelerated contract scheduling and budgeting by 80% by developing Power BI solutions that automated data aggregation from the ministry’s internal scheduling system for real-time evaluation.",
+  "Accelerated contract scheduling and budgeting by 20% by developing Power BI solutions that automated data aggregation from the ministry’s internal scheduling system for real-time evaluation.",
   "Reduced quarterly forecast modelling time by 30% by creating automated and scalable Excel templates for 30 sites that evaluate contract utilization data against forecasts.",
   "Onboarded 4 new sites by preparing their contracts and creating budgets and schedules according to requirements presented by relevant stakeholders.",
   "Reduced external data request lead time by 25% by engineering automated data pipelines with custom Oracle SQL queries, streamlining internal data management and ETL processes.",
@@ -41,12 +41,12 @@ place = "Burnaby, BC"
 title = "Graduate Research and Teaching Assistant"
 dates = "Sep 2021 – Apr 2024"
 points = [
-  "Improved scheduling and routing solution stability by 15% by applying advanced optimization modelling with Gurobi and CPLEX to strengthen optimal bounds.",
+  "Applied optimization modelling with Gurobi and CPLEX to strengthen optimal bounds for scheduling and routing problems.",
   "Generated 50+ precise benchmark solutions for operational analysis by modelling exact assignment and production scenarios in AMPL and Python.",
-  "Accelerated transport and distribution scenario evaluation by 30% using network flow and LP/MIP models in Pyomo and Gurobi.",
-  "Enhanced machine scheduling model tightness by 25% by improving branch-and-bound performance and integrating cutting planes in CPLEX.",
+  "Evaluated transport and distribution scenarios with network flow and LP/MIP models in Pyomo and Gurobi.",
+  "Tightened machine scheduling models by improving branch-and-bound performance and integrating cutting planes in CPLEX.",
   "Developed 10+ diagnostic frameworks in Python using NetworkX to analyze structural properties of warehouse and logistics networks.",
-  "Increased demand forecast accuracy by 18% by optimizing neural network training in PyTorch using quasi-Newton methods.",
+  "Trained neural networks for demand forecasting in PyTorch using quasi-Newton optimization methods.",
   "Adapted 20+ analytical methodologies by synthesizing scientific literature to solve complex assignment, allocation, and routing problems.",
   "Delivered 15+ technical presentations to diverse audiences of students and peer researchers, effectively communicating complex optimization concepts.",
 ]
@@ -86,6 +86,7 @@ gpa = "3.3/4.0"
 awards = "RE Lee International Fellowship, Johnson Summer Research Scholar, Evans Grant"
 
 [skills]
-"Programming and databases" = "SQL (MySQL, PostgreSQL, Oracle, MS SQL Server, MongoDB), Postman, OpenAPI, GraphQL, AMPL, Python (NetworkX, pandas, SciPy, PuLP, PyTorch)"
+"Programming and databases" = "SQL (MySQL, PostgreSQL, Oracle, MS SQL Server, MongoDB), Postman, OpenAPI, GraphQL, AMPL, Python (NetworkX, pandas, SciPy, PuLP, PyTorch), JavaScript"
+"Optimization and mathematics" = "Gurobi, CPLEX, HiGHS, SCIP, Pyomo, SageMath"
 "Product tools" = "Jira, Notion, Azure, MS Planner, SharePoint"
 "Analytics" = "MS Power Platform (Power Automate, Power BI, Excel VBA), Tableau, workflow mapping, journey mapping, storyboarding"

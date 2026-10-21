@@ -10,7 +10,8 @@ Read before changing anything. [README](README.md) states how the site is built;
 | --- | --- |
 | Every claim about a project is copied from that project's README or site, and its entry names the source. | The site is evidence for recruiters and researchers; an invented or rounded-up result is a misstatement. |
 | Résumé text changes only when the owner changes the résumé. Typo fixes are listed in Decisions. | The site must agree with the document the owner sends. |
-| No phone number, street address or immigration detail on the site or in the PDF. | Public page; the owner asked to omit private details. |
+| No phone number or street address on the site or in the PDF. The work-permit line stays (owner's decision, 2026-10-20). | Public page; the owner asked to omit private details. |
+| No AI-assistance disclosure in contribution lines. | Owner's decision, 2026-10-20. |
 | Content lives in `content/*.toml` only; the HTML and PDF are generated. | One source, so the page, the PDF and the tests cannot disagree. |
 | No framework, build tool, CDN or tracker. | Static hosting, fast on a phone, nothing third-party. |
 | Figures show the actual work (a result, a solution, a screen), never stock imagery. | The owner's instruction. |
