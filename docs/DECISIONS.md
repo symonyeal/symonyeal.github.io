@@ -54,6 +54,17 @@ Each entry: the decision, the alternatives, the reason, the date.
 - **Hero mark is the Fano plane**, drawn by `build.py`: an object from the thesis, not decoration.
 - **Key number per featured project** (`stat`), copied from that project's headline or results.
 
+## 2026-10-20, plain redesign (supersedes the redesign above)
+
+- **One column, one face, one accent.** The owner found the coloured redesign hideous and its copy
+  machine-sounding. Removed: dark bands, the Fano mark, fact boxes, area tiles, numbered heads,
+  subject colours, key numbers, tags, the filter and its script, the duplicated featured section,
+  Space Grotesk and JetBrains Mono. Each project now shows figure, title, year and subject, the
+  one-sentence finding and links; problem, method, results, limits and contribution sit under
+  Details. Model: a mathematician's academic homepage.
+- **Copy.** The slogan lead and the meta-sentences about how summaries are written are gone; the
+  introduction states degree, thesis, employment and what the projects cover.
+
 ## Open
 
 See [OPEN.md](OPEN.md).
