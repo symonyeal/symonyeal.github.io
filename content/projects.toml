@@ -6,6 +6,7 @@
 #   subject     one of SUBJECTS in build.py; the gallery filter
 #   featured    true puts the project under "Selected work" with its full write-up
 #   headline    the finding, in one sentence (answer first)
+#   stat        featured only: [key number, what it counts], copied from the headline or results
 #   problem, approach, results, limits   the write-up; results is a list
 #   contribution  what the author did
 #   formula     shown instead of a figure when a project has none
@@ -17,6 +18,7 @@ title = "Electric Fleet Optimization"
 year = "2026"
 subject = "Optimization"
 featured = true
+stat = ["571.95 < 573.13", "E-n23-k3: the proven optimum beside the published best-known value"]
 headline = "Proves the optimal routes for two instances of a public electric-vehicle routing benchmark; on one, the published value was not optimal."
 problem = "Electric vans and buses have limited range, so a plan must decide when and where each vehicle recharges as well as where it goes. The IEEE WCCI-2020 benchmark for electric-vehicle routing published best-known values that were never proven optimal, and no method reported a lower bound."
 approach = "A mixed-integer model on a station-path multigraph, bounded by a set-partitioning linear program solved by column generation with interior-point duals. Every reported plan is replayed, and every bound passes a schema check, so each instance is labelled certified, bracketed or open. The same core sizes buses and chargers for TransLink’s Route 100 timetable (219 trips a day)."
@@ -39,6 +41,7 @@ title = "Supply Chain Cuts"
 year = "2026"
 subject = "Optimization"
 featured = true
+stat = ["5", "single-country losses, all in China, that would each cut world lithium-ion cell output by a quarter or more over two years"]
 headline = "Five single-country losses, all in China, would each cut world lithium-ion cell output by a quarter or more over two years."
 problem = "Batteries and solar panels pass through mines, refineries and factories in many countries. Which losses of one country’s output, alone or with up to two others, would cut world production by at least 25% over 24 months, and how often might that happen?"
 approach = "A capacity network from mine to cell, built from 2024 production statistics and, where those are missing, export mass. A recourse linear program gives the least shortfall under each disruption. Minimal cut sets of up to three losses are enumerated three independent ways (an interdiction MILP built from the LP dual, a lattice search, exhaustive search), and their lists agree. Annual probability is bracketed by an exact lower bound plus a Monte Carlo residual."
@@ -61,6 +64,7 @@ title = "Resilient Supplier Panels"
 year = "2026"
 subject = "Optimization"
 featured = true
+stat = ["30 / 40", "sampled USDA baskets in which no supplier panel survives the loss of any one supplier"]
 headline = "In 30 of 40 sampled USDA food baskets, no choice of suppliers survives the loss of any one supplier, and in each case a single product is the cause."
 problem = "The USDA approves vendors for specific products before they may bid on its food purchases. A buyer wants a panel of suppliers that still covers every product in a basket after any one supplier fails. How small can it be, how many exist, and which suppliers cannot be replaced?"
 approach = "Resilient panels are the minimal transversals of a scenario hypergraph. A MILP finds the smallest panel (median 0.8 ms). Berge’s method and FK-B, from the author’s MSc thesis code, enumerate every minimal panel. Separate code certifies each panel against the USDA list, and a second MILP certifies that none is missing."
@@ -83,6 +87,7 @@ title = "Hypergraph Dualization (MSc thesis)"
 year = "2023–2024"
 subject = "Discrete mathematics"
 featured = true
+stat = ["S(4,5,11)", "the Witt design behind a new hard instance found by search"]
 headline = "Both Fredman–Khachiyan algorithms on one model, checked by an independent oracle; a search for hard inputs found one in the Witt design S(4,5,11)."
 problem = "Given two hypergraphs, decide whether each is the transversal hypergraph of the other: list every minimal way to meet all of a family of sets, and prove the list complete. Whether this can be done in polynomial time is open. Fredman and Khachiyan’s algorithms FK-A and FK-B run in quasi-polynomial time, but FK-A slows on highly symmetric families."
 approach = "The thesis analyses symmetry in clique hypergraphs and their transversals, shows that the FK-A decomposition induces a minor map on the underlying graph, and characterizes hypergraphs that FK-A struggles with. The repository implements FK-A and FK-B on one bitset model, draws their recursion trees side by side, and checks every answer against an independent transversal oracle."
@@ -105,6 +110,7 @@ title = "MMA Career Rankings"
 year = "2026"
 subject = "Applied statistics"
 featured = true
+stat = ["81,616", "professional fights in one rating model, ranking 34,147 fighters"]
 headline = "One rating model of 81,616 professional fights ranks 34,147 fighters by career, peak and current form, on a scale adjusted for era."
 problem = "Ranking fighters across three decades and many promotions: rating scales drift upward over time, promotions differ in depth, and a short unbeaten record can look better than a long elite career."
 approach = "Whole-History Rating (Coulom, 2008) fitted to every career at once, so later results revalue earlier wins. Each year is read against its division’s contender line; promotion weights are shrunk toward the average where evidence is thin; titles, contender wins and skill are square-rooted on a common scale before weighting."

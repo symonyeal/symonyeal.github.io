@@ -40,6 +40,20 @@ Each entry: the decision, the alternatives, the reason, the date.
   optional fields (`photo`, `status` in `content/profile.toml`) awaiting the owner's files.
 - LinkedIn URL confirmed by the owner.
 
+## 2026-10-20, redesign
+
+- **Colour encodes subject.** The owner found the single-accent page monotonous. Each subject has
+  one hue (optimization blue, applied statistics vermilion, discrete mathematics violet,
+  simulation and games green). It colours the project's spine, labels, key number, tags and
+  button, so the gallery filter doubles as a legend. Devices borrowed from Stripe Press
+  (colour identity per item), Brittany Chiang's portfolio (numbered mono section heads, hover
+  lift) and Distill (mono annotations). Alternatives offered: notebook, Swiss grid, dark
+  technical; the owner chose this one.
+- **Three faces, three jobs.** Space Grotesk for display, Source Serif 4 for reading, JetBrains
+  Mono for numbers and labels; all OFL, self-hosted latin subsets from Fontsource (+62 kB).
+- **Hero mark is the Fano plane**, drawn by `build.py`: an object from the thesis, not decoration.
+- **Key number per featured project** (`stat`), copied from that project's headline or results.
+
 ## Open
 
 See [OPEN.md](OPEN.md).
