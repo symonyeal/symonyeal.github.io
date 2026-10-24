@@ -71,19 +71,19 @@ slug = "hypergraph-dualization"
 title = "Hypergraph Dualization (MSc thesis)"
 year = "2023–2024"
 subject = "Discrete mathematics"
-headline = "My MSc thesis: both Fredman–Khachiyan algorithms for hypergraph dualization, checked against an independent oracle. A search for hard inputs found one in the Witt design S(4,5,11)."
+headline = "My MSc thesis on symmetry in hypergraph dualization, with corrected statements formalized in Lean. On alternating-tree inputs, FK-A has an exponential recursion tree while a suitable memoized split rule uses linearly many subproblems."
 problem = "Given two hypergraphs, decide whether each is the transversal hypergraph of the other: list every minimal way to meet all of a family of sets, and prove the list complete. Whether this can be done in polynomial time is open. Fredman and Khachiyan’s algorithms FK-A and FK-B run in quasi-polynomial time, but FK-A slows on highly symmetric families."
-approach = "The thesis analyses symmetry in clique hypergraphs and their transversals, shows that the FK-A decomposition induces a minor map on the underlying graph, and characterizes hypergraphs that FK-A struggles with. The repository implements FK-A and FK-B on one bitset model, draws their recursion trees side by side, and checks every answer against an independent transversal oracle."
+approach = "The thesis studies symmetry in hypergraphs and their transversals. The maintained repository implements FK-A and FK-B on one bitset model, checks their answers against an independent transversal oracle, and formalizes audited thesis statements and corrections in Lean 4 with Mathlib."
 results = [
-  "FK-A and FK-B agree on every instance, and the oracle confirms every answer. The test suite (457 passing) reproduces the thesis’s published recursion trees.",
-  "A search for new hard instances found one built from the Witt design S(4,5,11).",
-  "Counting distinct subproblems rather than tree nodes, none of the published hard instances is hard for the recursion itself.",
+  "Lean proofs distinguish exponential recursion-tree growth from a linear bound on distinct subproblems under the leftmost rule on the alternating trees.",
+  "The claim register separates proved results, finite checks, computations, cited results and open conjectures; the revised thesis applies the audited corrections.",
+  "The frequency bound ε(7) = 3/7 is proved, attained by the Fano plane.",
 ]
-limits = "Small instances; whether dualization is solvable in polynomial time remains open."
+limits = "Whether dualization is solvable in polynomial time remains open. The growth of the degree-sum rule’s distinct subproblems is also open; finite computations do not establish an asymptotic bound."
 contribution = "MSc thesis, Simon Fraser University, 2024 (senior supervisor: Tamon Stephen). The maintained Python implementation; the legacy implementation credits Saimon Islam and Lacey Liang."
-tags = ["hypergraphs", "monotone Boolean functions", "automorphism groups", "Python", "SageMath"]
-links = [["Thesis (PDF)", "https://github.com/symonyeal/Hypergraph-Dualization/blob/main/Saimon%20Islam%20Manuscript%20MSc%20Thesis%20(1).pdf"], ["Repository", "https://github.com/symonyeal/Hypergraph-Dualization"], ["Run in Binder", "https://mybinder.org/v2/gh/symonyeal/Hypergraph-Dualization/main?urlpath=lab"]]
-source = "Thesis abstract; README, In plain terms and Start here"
+tags = ["hypergraphs", "monotone Boolean functions", "automorphism groups", "Lean", "Python"]
+links = [["Revised thesis (PDF)", "https://github.com/symonyeal/Hypergraph-Dualization/blob/main/thesis/revised/main.pdf"], ["Repository", "https://github.com/symonyeal/Hypergraph-Dualization"]]
+source = "Hypergraph-Dualization README and thesis/CLAIMS.md at c1e49a1; research Theorems 4.24–4.26 and ε(7)"
 
 [[project]]
 slug = "mma-rankings"
