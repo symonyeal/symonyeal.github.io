@@ -1,10 +1,11 @@
-# symonyeal.github.io
+# Saimon Islam
 
-Personal site of Saimon Islam: introduction, every public project, experience, and the
-full résumé with a PDF. **Site: https://symonyeal.github.io/**.
+Personal site with research projects, experience and a résumé with a PDF copy.
 
-Static HTML and CSS; no framework, no server, no third-party requests.
-Three content files are the single source; `build.py` writes the pages from them.
+[Site](https://symonyeal.github.io/)
+
+`build.py` generates static HTML and CSS pages from three TOML content files. The published
+site makes no third-party requests and requires no application server.
 
 | Path | Contents |
 | --- | --- |
@@ -16,7 +17,7 @@ Three content files are the single source; `build.py` writes the pages from them
 | `tests/` | Pages match the content; local links resolve; no phone number; the PDF transcribes the résumé |
 | `qa/browser.py` | Edge checks: no horizontal scroll at 360–1440 px, navigation, PDF download, outbound links |
 
-## View locally
+## Local preview
 
 ```text
 python build.py
@@ -25,19 +26,19 @@ python -m http.server 8765 --bind 127.0.0.1 --directory site
 
 Open http://127.0.0.1:8765/. Opening `site/index.html` directly also works.
 
-## Add a project
+## Project entries
 
 1. Add a `[[project]]` block to `content/projects.toml`. Copy numbers only from the project's
    own README or site.
 2. `python build.py`, then the gate below.
 
-## Update the résumé
+## Résumé
 
 Edit `content/resume.toml`, then `python build.py --render` (needs Microsoft Edge and
 `pip install playwright`) to regenerate the pages and `site/Saimon-Islam-Resume.pdf`.
 The PDF must stay at two pages; a test enforces it.
 
-## Gate
+## Checks
 
 ```text
 python -m pytest -q
