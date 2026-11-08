@@ -15,6 +15,7 @@ site makes no third-party requests and requires no application server.
 | `build.py` | content → `site/index.html`, `site/resume.html`; `--render` also writes the PDF and `site/og.png` |
 | `site/` | The published folder; `*.html`, the PDF and `og.png` are generated, commit them |
 | `tests/` | Pages match the content; local links resolve; no phone number; the PDF transcribes the résumé |
+| `qa/sources.py` | Card numbers must appear in the origin README; outbound links answer 200 (CI) |
 | `qa/browser.py` | Edge checks: no horizontal scroll at 360–1440 px, navigation, PDF download, outbound links |
 
 ## Local preview
@@ -43,9 +44,10 @@ The PDF must stay at two pages; a test enforces it.
 ```text
 python -m pytest -q
 python -m ruff check .
-python qa/browser.py --external      # with the local server running
+python qa/sources.py                # card numbers against origin READMEs, outbound links
+python qa/browser.py                 # with the local server running
 ```
 
-GitHub Actions runs the first two on every push; `pages.yml` publishes `site/`.
+GitHub Actions runs the first three on every push; `pages.yml` publishes `site/`.
 
 Code: MIT. Text and résumé: © Saimon Islam. Font (Inter): SIL Open Font License (`site/assets/fonts/OFL.txt`).

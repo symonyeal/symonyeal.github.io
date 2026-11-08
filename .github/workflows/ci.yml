@@ -17,3 +17,4 @@ jobs:
       - run: python -m pip install -r requirements.txt
       - run: python -m pytest -q
       - run: python -m ruff check .
+      - run: python qa/sources.py

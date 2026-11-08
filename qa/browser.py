@@ -3,7 +3,7 @@
     python -m http.server 8765 --bind 127.0.0.1 --directory site
     python qa/browser.py [base-url] [--external]
 
-Checks, at widths 360, 390, 768 and 1440 and in both colour schemes: no horizontal scroll; every
+Checks, at widths 360, 390, 768 and 1440: no horizontal scroll; every
 nav target exists; the PDF link returns a PDF. --external
 also requests every outbound link. Screenshots go to qa/out/.
 """
@@ -24,7 +24,7 @@ def check(ok, msg):
 with sync_playwright() as pw:
     b = pw.chromium.launch(channel="msedge")
     for W, H in [(360, 780), (390, 844), (768, 1024), (1440, 900)]:
-        for scheme in ["light", "dark"]:
+        for scheme in ["light"]:
             pg = b.new_page(viewport={"width": W, "height": H}, color_scheme=scheme)
             for page in ["", "resume.html"]:
                 pg.goto(base + page, wait_until="networkidle")

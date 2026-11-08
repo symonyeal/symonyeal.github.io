@@ -72,3 +72,10 @@ def test_pdf_transcribes_resume():
     for x in build.CV["experience"]:
         for pt in x["points"]:
             assert norm(pt)[:40] in t, pt
+
+
+def test_stale_card_number_is_listed():
+    from qa import sources
+    assert sources.missing("81,616 fights; 99.4% of 1,837", "81,643 fights; 99.3% of 1,840") == ["1837", "81616", "99.4"]
+    assert sources.missing("2026: 30 of 40 baskets, 2 µs", "30 of 40 baskets; median 2 µs") == []
+    assert sources.missing("1.5 hours", "11.5 hours or 1.55") == ["1.5"]

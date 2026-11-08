@@ -1,99 +1,63 @@
 # Decisions
 
-Each entry: the decision, the alternatives, the reason, the date.
+Each entry: the decision, the alternatives, the reason, the date. Superseded designs are in the git history.
 
-## 2026-10-20
+## Design (current)
 
-- **Static pages generated from TOML.** Alternatives: hand-written HTML (the résumé page and PDF
-  drift apart); JSON rendered by JavaScript (content invisible without script, slower first
+- **Static pages generated from TOML** (2026-10-20). Alternatives: hand-written HTML (the résumé page
+  and PDF drift apart); JSON rendered by JavaScript (content invisible without script, slower first
   paint). `tomllib` is in the standard library, so the build has no dependency.
-- **The PDF is printed from `resume.html`.** One source for both; the print stylesheet sets
-  Letter size and two pages.
-- **Structure follows the pyramid principle.** The hero states the governing thought, then three
-  supporting facts. Each project leads with its finding, then problem, results, limits and
-  contribution; the method is one click away. Subjects are mutually exclusive, so the filter
-  partitions the gallery.
-- **Five selected projects.** Electric fleet, supply-chain cuts and supplier panels show the
-  certificate-carrying optimization work; the thesis serves research readers; MMA rankings is
-  the most developed site. All nine appear in the gallery.
-- **Figures** were captured from the live sites on 2026-10-20 (Edge, 1440 px, light scheme) or
-  taken from repository figures, cropped to 3:2 and padded with their own background where
-  narrower. The sparse-portfolio project has no figure, so its model is shown as a formula.
-- **Self-hosted Source Serif 4**, latin subset, two variable files (250 kB). No font CDN.
-- **Résumé transcription changes.** Omitted: phone number, work-permit line. Corrected: "aSaimon"
-  → "Saimon"; "PostGRE" → "PostgreSQL"; "SciPy PuLP" → "SciPy, PuLP"; "Excel- VBA" → "Excel VBA";
-  "Sharepoint" → "SharePoint"; "Coordinated in the development" → "Coordinated the development";
-  "evaluates" → "evaluate"; "premier provider" → "principal provider"; "Anesthesia" lower-cased
-  mid-sentence; "modeling" → "modelling". Added from the thesis title page: thesis title and
-  senior supervisor. Added: Washington and Lee's location (Lexington, VA).
+- **The PDF is printed from `resume.html`.** One source for both; the print stylesheet sets Letter
+  size and two pages.
+- **One column, white page, Inter, one blue link colour** (2026-10-20, after the owner rejected the
+  serif, coloured and plain variants). Inter is OFL, self-hosted as a 48 kB latin subset; no font CDN.
+- **Project cards are text in a two-column grid.** Each card says what the project is and what it
+  found, in plain first person, with the numbers unchanged from the sources. The write-up fields
+  (problem, approach, results, limits) stay in `content/projects.toml` as the source of the headline.
+- **Structure follows the pyramid principle.** The introduction states degree, thesis, employment and
+  what the projects cover; each project leads with its finding.
+- **Projects are listed in `content/projects.toml` order**, twelve at 2026-11-08, each with a `source`
+  field naming the README section and revision it was copied from.
+- **Card numbers are checked against the origin README** (2026-11-08): `qa/sources.py` lists every
+  headline number that the repository README at HEAD does not contain, and every outbound link that
+  does not answer 200. It runs in CI. A number that moves in a README fails the check, so the card is
+  re-copied.
 
-## 2026-10-20, owner's answers
+## Résumé
 
-- Ministry bullet corrected from 80% to 20%, agreeing with the summary.
-- "On valid work permit" shown in the résumé contact line and PDF. Phone stays omitted.
-- No AI-assistance disclosure.
-- The four SFU research-assistant percentages (15%, 30%, 25%, 18%) removed; each bullet keeps
-  the work it describes. Counts (50+, 10+, 20+, 15+) unchanged.
-- Skills: JavaScript added; new line "Optimization and mathematics": Gurobi, CPLEX, HiGHS, SCIP,
-  Pyomo, SageMath (all evidenced by the résumé bullets or the public repositories).
-- Headshot and status line come from LinkedIn; LinkedIn refuses automated access, so they are
-  optional fields (`photo`, `status` in `content/profile.toml`) awaiting the owner's files.
-- LinkedIn URL confirmed by the owner.
-
-## 2026-10-20, redesign
-
-- **Colour encodes subject.** The owner found the single-accent page monotonous. Each subject has
-  one hue (optimization blue, applied statistics vermilion, discrete mathematics violet,
-  simulation and games green). It colours the project's spine, labels, key number, tags and
-  button, so the gallery filter doubles as a legend. Devices borrowed from Stripe Press
-  (colour identity per item), Brittany Chiang's portfolio (numbered mono section heads, hover
-  lift) and Distill (mono annotations). Alternatives offered: notebook, Swiss grid, dark
-  technical; the owner chose this one.
-- **Three faces, three jobs.** Space Grotesk for display, Source Serif 4 for reading, JetBrains
-  Mono for numbers and labels; all OFL, self-hosted latin subsets from Fontsource (+62 kB).
-- **Hero mark is the Fano plane**, drawn by `build.py`: an object from the thesis, not decoration.
-- **Key number per featured project** (`stat`), copied from that project's headline or results.
-
-## 2026-10-20, plain redesign (supersedes the redesign above)
-
-- **One column, one face, one accent.** The owner found the coloured redesign hideous and its copy
-  machine-sounding. Removed: dark bands, the Fano mark, fact boxes, area tiles, numbered heads,
-  subject colours, key numbers, tags, the filter and its script, the duplicated featured section,
-  Space Grotesk and JetBrains Mono. Each project now shows figure, title, year and subject, the
-  one-sentence finding and links; problem, method, results, limits and contribution sit under
-  Details. Model: a mathematician's academic homepage.
-- **Copy.** The slogan lead and the meta-sentences about how summaries are written are gone; the
-  introduction states degree, thesis, employment and what the projects cover.
-
-## 2026-10-20, modern minimal (supersedes both redesigns above)
-
-- The owner rejected the plain serif version: cream and grey palette, muddy dark mode, bad
-  thumbnails, copy still machine-sounding. Chose "modern minimal sans" from offered options.
-- **White page, Inter, one blue link colour, no dark mode.** Inter: OFL, self-hosted latin subset
-  (48 kB), replacing Source Serif 4.
-- **No figures.** The figures were screenshots of nine different sites (cream backgrounds, clipped
-  text, one nearly blank tree) and cannot be made consistent by cropping. Projects are text cards
-  in a two-column grid. Consistent figures would need regenerating from each repository.
-- **Copy rewritten** in plain first person; each card says what the project is and what it found,
-  with the numbers unchanged from the sources.
-
-## 2026-11-07, résumé and project refresh
-
-- **Résumé re-transcribed** from the owner's current Word master (`Saimon Islam Master Original
-  Resume.docx`), which the owner rewrote 2026-11-01 to 2026-11-03: Government of Yukon role added,
-  Incepta role and University of Edinburgh exchange added, SFU research bullets replace the earlier
-  ones, ATA dated Dec 2020, summary, skills and courses as in the master. The contact line follows
-  the master's header ("No sponsorship required · Willing to relocate"); phone still omitted. The
-  master's Projects and activities sections are not transcribed: the projects are on the home page.
-- Education entries may omit GPA and awards (the exchange semester has neither).
+- **Transcription of the owner's Word master** (2026-10-20). Omitted: phone number. Corrected:
+  "aSaimon" → "Saimon"; "PostGRE" → "PostgreSQL"; "SciPy PuLP" → "SciPy, PuLP"; "Excel- VBA" →
+  "Excel VBA"; "Sharepoint" → "SharePoint"; "Coordinated in the development" → "Coordinated the
+  development"; "evaluates" → "evaluate"; "premier provider" → "principal provider"; "Anesthesia"
+  lower-cased mid-sentence; "modeling" → "modelling". Added from the thesis title page: thesis title
+  and senior supervisor. Added: Washington and Lee's location (Lexington, VA).
+- **Owner's answers** (2026-10-20): no AI-assistance disclosure; the four SFU research-assistant
+  percentages (15%, 30%, 25%, 18%) removed, each bullet keeps the work it describes, counts (50+,
+  10+, 20+, 15+) unchanged; skills gained JavaScript and an "Optimization and mathematics" line
+  (Gurobi, CPLEX, HiGHS, SCIP, Pyomo, SageMath), all evidenced by the résumé bullets or the public
+  repositories; LinkedIn URL confirmed. The headshot and status line would come from LinkedIn, which
+  refuses automated access, so they are optional fields (`photo`, `status` in `content/profile.toml`)
+  awaiting the owner's files.
+- **Re-transcribed from the current Word master** (`Saimon Islam Master Original Resume.docx`, which the
+  owner rewrote 2026-11-01 to 2026-11-03), 2026-11-07: Government of Yukon role added, Incepta role and
+  University of Edinburgh exchange added, SFU research bullets replace the earlier ones, ATA dated
+  Dec 2020, summary, skills and courses as in the master. The contact line follows the master's header
+  ("No sponsorship required · Willing to relocate"); phone still omitted. The master's Projects and
+  activities sections are not transcribed: the projects are on the home page. Education entries may
+  omit GPA and awards (the exchange semester has neither).
 - **Thesis link** moved to `thesis/2024/deposited.pdf`; the old manuscript path returned 404.
-- **Project cards rechecked** against each repository's README on `main`. Corrected: Electric
-  Fleet (four certified optima; duals come from the simplex LP, not an interior-point master),
-  MMA counts, Renter Cost Burden (now the Canadian atlas, not the US county study), Electricity
-  (Dantzig–Wolfe, random-system agreement and the archived battery backtest are no longer in the
-  repository), Resilient Supplier Panels (branch and bound, 2 µs median, releases link). Language
-  tags follow each repository. Added: Minimal Metabolic Interventions, Canada Regional Profiles,
-  Open-Source Watch (crediting IRONSIGHT).
+
+## Project cards, 2026-11-07
+
+- **Rechecked against each repository's README on `main`.** Corrected: Electric Fleet (four certified
+  optima; duals come from the simplex LP, not an interior-point master), MMA counts, Renter Cost
+  Burden (now the Canadian atlas, not the US county study), Electricity (Dantzig–Wolfe, random-system
+  agreement and the archived battery backtest are no longer in the repository), Resilient Supplier
+  Panels (branch and bound, 2 µs median, releases link). Language tags follow each repository.
+  Added: Minimal Metabolic Interventions, Canada Regional Profiles, Open-Source Watch (crediting
+  IRONSIGHT).
+- **Agent instruction files** (`CLAUDE.md`, `AGENTS.md`) and local tooling notes removed from the
+  published tree.
 
 ## Open
 
