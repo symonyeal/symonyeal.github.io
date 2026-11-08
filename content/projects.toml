@@ -14,38 +14,38 @@ slug = "electric-fleet"
 title = "Electric Fleet Optimization"
 year = "2026"
 subject = "Optimization"
-headline = "Plans electric-vehicle routes with charging stops and proves how far each plan can be from optimal. Two benchmark instances are solved to proven optimality; on one, the optimum beats the published best value."
-problem = "Electric vans and buses have limited range, so a plan must decide when and where each vehicle recharges as well as where it goes. The IEEE WCCI-2020 benchmark for electric-vehicle routing published best-known values that were never proven optimal, and no method reported a lower bound."
-approach = "A mixed-integer model on a station-path multigraph, bounded by a set-partitioning linear program solved by column generation with interior-point duals. Every reported plan is replayed, and every bound passes a schema check, so each instance is labelled certified, bracketed or open. The same core sizes buses and chargers for TransLink’s Route 100 timetable (219 trips a day)."
+headline = "Plans electric-vehicle routes with charging stops and proves how far each plan can be from optimal. Four benchmark instances are solved to proven optimality; on three of them the optimum is shorter than the published value."
+problem = "Electric vans and buses have limited range, so a plan must decide when and where each vehicle recharges as well as where it goes. The IEEE WCCI-2020 benchmark for electric-vehicle routing published values as upper bounds that were never verified optimal, and later heuristics report no lower bounds."
+approach = "A mixed-integer model on a station-path multigraph, bounded by a set-partitioning linear program solved by column generation with rounded capacity cuts; the Lagrangian bound is valid at every exact pricing. Every reported plan is replayed and every bound comes from an admitted result bundle, so each instance is labelled certified or bracketed. The same code schedules and charges TransLink’s Route 100 timetable (219 trips a day)."
 results = [
-  "E-n22-k4 and E-n23-k3 certified optimal. On E-n23-k3 the optimum, 571.95, is shorter than the published 573.13.",
-  "E-n30-k3 bracketed within 0.191%: a route shorter than the published one, and a proof that none is more than 0.2% shorter.",
-  "Route 100: ignoring battery limits, 16 buses cover the timetable.",
+  "E-n22-k4, E-n23-k3, E-n30-k3 and E-n33-k4 certified optimal. On E-n33-k4 the optimum, 840.15, is shorter than the published 869.89.",
+  "E-n51-k5, E-n76-k7 and E-n101-k8 are bracketed, with gaps of 24.6% to 33.0%.",
+  "Route 100: ignoring battery limits, 16 buses cover the timetable. With 250 kWh batteries, the best full-day schedule found uses 22 buses, with a 38.4% gap to its lower bound.",
 ]
-limits = "One depot, identical vehicles, no time windows or driver shifts. Four of the seven benchmark instances remain open, and the full-day bus result with batteries and BC Hydro prices has not yet been computed. It is not TransLink’s operating plan."
+limits = "One depot, identical vehicles, no time windows or driver shifts. Three of the seven benchmark instances remain bracketed, and the full-day battery schedule is not proved optimal. It is not TransLink’s operating plan."
 contribution = "Independent project: formulation, algorithms, validation and documentation."
-tags = ["mixed-integer programming", "column generation", "interior-point methods", "Python"]
+tags = ["mixed-integer programming", "column generation", "Lagrangian bounds", "Rust"]
 links = [["Repository", "https://github.com/symonyeal/Electric-Fleet-Optimization"]]
-source = "README, Results table (code revisions 2533ebe, 474149b, 9c00dc3)"
+source = "README, Results table (revision 8f07c5c); docs/results/README.md, Route 100"
 
 [[project]]
 slug = "supply-chain-cuts"
 title = "Supply Chain Cuts"
 year = "2026"
 subject = "Optimization"
-headline = "Which losses of one country’s output would cut world battery or solar production by a quarter? For lithium-ion cells there are five, all in China."
+headline = "Which losses of one country’s output would cut world battery or solar production by a quarter? If plants can switch battery chemistry, lithium-ion supply has five, all in China."
 problem = "Batteries and solar panels pass through mines, refineries and factories in many countries. Which losses of one country’s output, alone or with up to two others, would cut world production by at least 25% over 24 months, and how often might that happen?"
-approach = "A capacity network from mine to cell, built from 2024 production statistics and, where those are missing, export mass. A recourse linear program gives the least shortfall under each disruption. Minimal cut sets of up to three losses are enumerated three independent ways (an interdiction MILP built from the LP dual, a lattice search, exhaustive search), and their lists agree. Annual probability is bracketed by an exact lower bound plus a Monte Carlo residual."
+approach = "A capacity network from mine to cell, built from 2024 production statistics and, where those are missing, export mass. A recourse linear program gives the least shortfall under each disruption. Minimal cut sets of up to three losses are enumerated three ways that share no code (an interdiction MILP built from the LP dual, a lattice search pruned by capacity dominance, exhaustive search), and their lists agree. Annual probability is bracketed by an exact lower bound plus a Monte Carlo residual."
 results = [
-  "Batteries: five single weak points (cells, cathode material, anode material, graphite, lithium carbonate), assuming plants can switch between LFP and NCM chemistries.",
+  "Batteries: five single weak points (cells, cathode material, anode material, graphite, lithium carbonate), assuming plants can switch between LFP and NCM chemistries; the fixed 50/50 mix has seven.",
   "Solar: four single weak points (polysilicon, wafers, cells, modules).",
-  "If every export restriction recorded since 2012 were a complete shutdown, such a shortfall would occur in about 29% of years for batteries and 24% for solar. These are stress scenarios, not forecasts.",
+  "If every export restriction recorded since 2012 were a complete shutdown, such a shortfall would occur in about 29% of years for batteries and 24% for solar. These are conditional scenarios, not forecasts.",
 ]
-limits = "Much capacity outside China is estimated from export volumes. No plant locations are modelled, so natural hazards are a scenario only. Recorded export restrictions fail the predictive test."
+limits = "Much capacity outside China is estimated from export volumes. Actual plant switchability is unmeasured. Recorded export restrictions fail the predictive test."
 contribution = "Independent project: model, enumeration methods, data reconciliation, validation and interactive site."
-tags = ["network interdiction", "linear programming", "Monte Carlo", "supply-chain risk", "Python"]
+tags = ["network interdiction", "linear programming", "Monte Carlo", "supply-chain risk", "Python", "Rust"]
 links = [["Interactive site", "https://symonyeal.github.io/Supply-Chain-Cuts/"], ["Repository", "https://github.com/symonyeal/Supply-Chain-Cuts"]]
-source = "README, In plain terms and Answer; site v0.3.0"
+source = "README, Main findings and Updated model results (718104f)"
 
 [[project]]
 slug = "supplier-panels"
@@ -54,17 +54,17 @@ year = "2026"
 subject = "Optimization"
 headline = "Picks USDA food suppliers so that every product is still covered if any one supplier fails. In 30 of 40 sampled baskets no such choice exists, because one product has a single approved supplier."
 problem = "The USDA approves vendors for specific products before they may bid on its food purchases. A buyer wants a panel of suppliers that still covers every product in a basket after any one supplier fails. How small can it be, how many exist, and which suppliers cannot be replaced?"
-approach = "Resilient panels are the minimal transversals of a scenario hypergraph. A MILP finds the smallest panel (median 0.8 ms). Berge’s method and FK-B, from the author’s MSc thesis code, enumerate every minimal panel. Separate code certifies each panel against the USDA list, and a second MILP certifies that none is missing."
+approach = "Resilient panels are the minimal transversals of a scenario hypergraph. Branch and bound finds a smallest panel exactly (median 2 µs). Berge’s method and FK-B, from the author’s MSc thesis, and MMCS enumerate every minimal panel; a counting theorem counts them without listing. Separate code checks every panel against the USDA list, and an exhaustive search checks that the enumeration is complete."
 results = [
   "30 of 40 baskets have no resilient panel; each contains a product with only one approved supplier. Approving a second supplier, not choosing differently, fixes it.",
   "In the other 10 baskets, 2 to 6 suppliers cover every product after any single failure.",
-  "Canned-goods example: 21 approved suppliers, a smallest panel of 2, and 1,284 certified minimal panels.",
+  "Canned-goods example: 21 approved suppliers, a smallest panel of 2, and 1,284 minimal panels.",
 ]
-limits = "Approvals only: not capacity, price, delivery record or shared ownership. One data snapshot (2026-10-15). Research, not a purchasing recommendation."
-contribution = "Independent project: model, solver and enumeration pipeline, certificates and interactive site. Release 0.2.0."
-tags = ["hypergraph transversals", "integer programming", "enumeration", "Python"]
-links = [["Interactive site", "https://symonyeal.github.io/Resilient-Supplier-Panels/"], ["Repository", "https://github.com/symonyeal/Resilient-Supplier-Panels"], ["Release 0.2.0", "https://github.com/symonyeal/Resilient-Supplier-Panels/releases/tag/v0.2.0"]]
-source = "README, The short answer and Three examples"
+limits = "Approvals only: not capacity, price or delivery record. The 40-basket result uses one data snapshot (2026-10-15). Research, not a purchasing recommendation."
+contribution = "Independent project: model, solver and enumeration pipeline, checks and interactive site."
+tags = ["hypergraph transversals", "integer programming", "enumeration", "Rust"]
+links = [["Interactive site", "https://symonyeal.github.io/Resilient-Supplier-Panels/"], ["Repository", "https://github.com/symonyeal/Resilient-Supplier-Panels"], ["Releases", "https://github.com/symonyeal/Resilient-Supplier-Panels/releases"]]
+source = "README, short answer, three examples, Validation and benchmark note (f5280d6)"
 
 [[project]]
 slug = "hypergraph-dualization"
@@ -83,64 +83,101 @@ limits = "Whether dualization is solvable in polynomial time remains open. The g
 contribution = "MSc thesis, Simon Fraser University, 2024 (senior supervisor: Tamon Stephen). The maintained Python implementation; the legacy implementation credits Saimon Islam and Lacey Liang."
 tags = ["hypergraphs", "monotone Boolean functions", "automorphism groups", "Lean", "Python"]
 links = [["Revised thesis (PDF)", "https://github.com/symonyeal/Hypergraph-Dualization/blob/main/thesis/revised/main.pdf"], ["Repository", "https://github.com/symonyeal/Hypergraph-Dualization"]]
-source = "Hypergraph-Dualization README and thesis/CLAIMS.md at c1e49a1; research Theorems 4.24–4.26 and ε(7)"
+source = "Hypergraph-Dualization README and thesis/CLAIMS.md at c1e49a1, rechecked at e5479ac; research Theorems 4.24–4.26 and ε(7)"
+
+[[project]]
+slug = "metabolic-cut-sets"
+title = "Minimal Metabolic Interventions"
+year = "2026"
+subject = "Discrete mathematics"
+headline = "Computes minimal cut sets of E. coli metabolic networks from their 100,274 elementary modes in exact integer arithmetic, and measures where the MMCS search spends its nodes: most lie in dead subtrees, not repeated states."
+problem = "A minimal cut set of a metabolic network is a set of reactions whose removal blocks a target function, such as growth or ethanol export, and contains no smaller blocking set. Given the elementary modes carrying the target, the cut sets are the minimal hitting sets of their supports: a hypergraph dualization problem, usually solved by MMCS."
+approach = "Elementary modes of a BiGG model are enumerated in exact integer arithmetic; MMCS enumerates the minimal hitting sets with static twins merged; every enumerated family is checked against at least one independent enumerator (brute force, Berge, SHD or an LP cut oracle)."
+results = [
+  "BiGG e_coli_core: the 100,274 elementary modes are reproduced.",
+  "Dead subtrees hold 26% to 79% of search nodes across six instances (79.3% on the 38,391-node combined-growth search).",
+  "Reusing isomorphic states could save at most 7.1 percentage points beyond exact repeats, below the predeclared 1/6 threshold, so the study stopped there.",
+]
+limits = "Two reconstructions of one organism; no claim across organisms. Times are laptop measurements."
+contribution = "Independent project: enumeration code, independent checks and the search-node census."
+tags = ["hypergraph dualization", "metabolic networks", "exact arithmetic", "Rust"]
+links = [["Repository", "https://github.com/symonyeal/Minimal-Metabolic-Interventions"]]
+source = "README, Background, Result and Limits (8ce45c4)"
 
 [[project]]
 slug = "mma-rankings"
 title = "MMA Career Rankings"
 year = "2026"
 subject = "Applied statistics"
-headline = "Era-adjusted ratings for 34,147 fighters, fitted to 81,616 professional fights and ranked by career, peak and current form."
+headline = "Era-adjusted ratings for 34,150 fighters, fitted to 81,643 professional fights and ranked by career, peak and current form."
 problem = "Ranking fighters across three decades and many promotions: rating scales drift upward over time, promotions differ in depth, and a short unbeaten record can look better than a long elite career."
-approach = "Whole-History Rating (Coulom, 2008) fitted to every career at once, so later results revalue earlier wins. Each year is read against its division’s contender line; promotion weights are shrunk toward the average where evidence is thin; titles, contender wins and skill are square-rooted on a common scale before weighting."
+approach = "Whole-History Rating (Coulom, 2008) fitted to every career at once, so later results revalue earlier wins. Promotion weights are kept out of the rating and pulled toward the average where evidence is thin. The model is written in Rust; source acquisition and staging are in Python."
 results = [
-  "81,616 rated fights and 34,147 rated fighters; whole-career coverage for 1,826 of 1,837 eligible fighters (99.4%).",
-  "Published boards for all-time, prime and current form, by weight class, for men and women.",
-  "The site lets a reader change the score’s weights and see the order change, and checks forecast calibration against outcomes.",
+  "81,643 rated fights and 34,150 rated fighters; whole-career coverage for 1,827 of 1,840 eligible fighters (99.3%).",
+  "Published All-time and Prime boards for men and women, with Current and weight-class boards for UFC fighters.",
+  "The site lets a reader filter boards by roster, weight class, board size and minimum rated bouts, and overlay fighters’ career arcs.",
 ]
 limits = "Not yet shown to predict fights better than a simpler rating; that test is open. Promotion labels are missing from 54% of rated fights."
 contribution = "Independent project: rating model, data assembly, release checks and interactive site."
-tags = ["rating systems", "Bayesian inference", "paired comparison", "data visualization", "Python"]
+tags = ["rating systems", "Bayesian inference", "paired comparison", "data visualization", "Rust", "Python"]
 links = [["Interactive site", "https://symonyeal.github.io/MMA-Career-Rankings/"], ["Repository", "https://github.com/symonyeal/MMA-Career-Rankings"]]
-source = "README, In plain terms and release facts (dataset 2026-10-14)"
+source = "README, Rankings, Rating model, release facts and Structure (d0b365e)"
+
+[[project]]
+slug = "canada-regional-profiles"
+title = "Canada Regional Profiles"
+year = "2026"
+subject = "Applied statistics"
+headline = "A dashboard comparing Canadian provinces, territories, municipalities, census divisions, metropolitan areas, economic regions and population centres, queried live from Statistics Canada and the OECD. It ranks each place among comparable areas, decomposes payroll job change and finds similar places and neighbours."
+problem = "How does a Canadian place compare with similar places, its neighbours and its province on population, jobs, income and housing, using only published official data?"
+approach = "The page queries Statistics Canada and the OECD when a view opens and ships no downloaded observations. Places are ranked within cohorts of comparable areas; payroll job change from SEPH is split by shift-share (Dunn, 1960) into national growth, sector mix and regional shift; neighbours come from simplified 2021 boundaries."
+results = [
+  "Compares a place with its five most similar areas, its neighbours or reader-selected peers.",
+  "Shift-share decomposition of payroll job change across 20 NAICS sectors for provinces and territories.",
+  "The selection and view are stored in a shareable URL.",
+]
+limits = "Results depend on the live sources answering; annual comparisons use only years published for every area shown."
+contribution = "Independent project: data adapters, models, boundary processing and dashboard."
+tags = ["regional economics", "shift-share", "official statistics", "JavaScript", "Rust"]
+links = [["Dashboard", "https://symonyeal.github.io/Canada-Regional-Profiles/"], ["Repository", "https://github.com/symonyeal/Canada-Regional-Profiles"]]
+source = "README, introduction, Dashboard views and definitions (6b0cb39)"
 
 [[project]]
 slug = "renter-cost-burden"
 title = "Renter Cost Burden"
 year = "2026"
 subject = "Applied statistics"
-headline = "Did renter incomes keep up with rent in 30 large US counties from 2011 to 2024? Mostly: the share of renters paying 30% or more of income went from 51.2% to 51.9%, within survey error."
-problem = "Did renter incomes keep up with rent in the 30 largest counties of Colorado, Massachusetts and Washington from 2011 to 2024, and did job growth make renters worse off?"
-approach = "Census and BLS data, inflation-adjusted. Every change is compared with its Census 90% margin. Forecasts use only figures published by each forecast date, with 2023–2024 held back and registered before scoring."
+headline = "An atlas of renter shelter costs across Canadian provinces, territories, metropolitan areas and 5,161 communities. In 2021, 33.2% of renter households spent at least 30% of income on shelter, down from 40.0% in 2016."
+problem = "How heavy are renters’ shelter costs across Canada, and how have rents moved against prices, using only Statistics Canada and CMHC measures?"
+approach = "Census burden rates, the Canadian Housing Survey, CMHC’s rental survey and the CPI rent index, each kept with its own population and period. The site never divides one measure by another; suppressed cells stay empty."
 results = [
-  "51.2% of renter households spent 30% or more of income on rent and utilities in 2011 and 51.9% in 2024, inside the ±1.0-point margin.",
-  "In the median county, rent rose 33% and renter income 32%; seven counties changed by more than the survey can miss.",
-  "Carrying last year’s value forward (error 2.85 points) beat a regression (3.60) and boosted trees (3.12).",
+  "33.2% of renter households spent at least 30% of income on shelter in 2021, down from 40.0% in 2016; Census 2021 measured 2020 income, which included pandemic benefits.",
+  "From 2000 to 2025 the CPI rent index rose 68.6%, against 72.1% for all consumer prices.",
+  "Core housing need affected 22.0% of renter households in the ten provinces in 2024, unchanged from 2018.",
 ]
-limits = "Thirty large counties in three states; associations, not causes."
-contribution = "Independent project: data pipeline, estimation, forecast tests and site."
-tags = ["survey statistics", "forecasting", "American Community Survey", "Python"]
+limits = "Each measure describes a different population and period; Census counts are randomly rounded, and small communities can show 0% burdened."
+contribution = "Independent project: data pipeline, atlas and interactive maps."
+tags = ["official statistics", "housing", "census data", "Rust"]
 links = [["Interactive site", "https://symonyeal.github.io/Renter-Cost-Burden/"], ["Repository", "https://github.com/symonyeal/Renter-Cost-Burden"]]
-source = "README, What the data shows"
+source = "README, Findings and Definitions and limits (main, 2026-11-07)"
 
 [[project]]
 slug = "electricity-pricing"
 title = "Electricity Clearing and Pricing"
 year = "2026"
 subject = "Optimization"
-headline = "Compares pricing rules for electricity markets. On a FERC example, convex-hull pricing cuts side payments to generators by 78% with the same dispatch."
+headline = "Compares pricing rules for electricity markets by the side payments each leaves. On a FERC example, convex-hull pricing cuts side payments to generators from $1,690 to $365 with the same dispatch."
 problem = "Power plants with start-up costs and minimum outputs cannot be paid by one price per hour, so markets add side payments (uplift) charged back to consumers. How much uplift is paid depends on the pricing rule."
-approach = "Exact unit-commitment and pricing models on small systems: locational marginal, convex-hull and average-incremental-cost prices, with the hull computed two ways and by Dantzig–Wolfe column generation, checked against each other and against published cases."
+approach = "Exact unit-commitment and pricing models on small systems with DC lines and transfer limits: locational marginal, convex-hull and average-incremental-cost prices, with exact unit hulls and a Lagrangian certificate, and each rule settled. HiGHS solves the linear and mixed-integer programs through a native Rust binding."
 results = [
   "FERC staff case: marginal pricing posts $90/MWh at the peak with $1,690 uplift; convex-hull pricing posts $276/MWh with $365.",
-  "The two hull constructions agree to 2.6 × 10⁻¹⁶ on 104 feasible random systems; omitting congestion gives a wrong bound with no warning.",
-  "A 1 MW, 4 MWh battery in New York City in 2025 would have netted about $41,000, 22% of the perfect-foresight $190,720 (archived output, not re-run).",
+  "Outputs on 29 markets are pinned against an independent implementation, including seeded random markets, duration obligations, zero demand and infeasible minimum output.",
 ]
-limits = "Small systems; compares pricing rules, does not run a market."
-contribution = "Independent project: models, decomposition, settlement checks."
-tags = ["unit commitment", "convex hull pricing", "Dantzig–Wolfe", "energy storage", "Python"]
+limits = "Small systems; a research benchmark for price formation, not a market model."
+contribution = "Independent project: models, settlement, validation."
+tags = ["unit commitment", "convex hull pricing", "mixed-integer programming", "Rust"]
 links = [["Repository", "https://github.com/symonyeal/Electricity-Clearing-and-Pricing"]]
-source = "README, In plain terms and What it shows"
+source = "README, Background; docs/VALIDATION.md, Cases and Checks (12eb0d2)"
 
 [[project]]
 slug = "sparse-portfolio"
@@ -149,16 +186,35 @@ year = "2026"
 subject = "Optimization"
 headline = "Portfolio models that hold at most K stocks, with every solution checked independently on public benchmarks. The investment test waits on licensed CRSP data."
 problem = "Does choosing a few stocks by optimization, rather than at random, lower the chance of trailing the market or Treasury bills, given that a few percent of firms account for all net stock-market gains?"
-approach = "Six formulations (mean–variance and its perspective reformulation, absolute deviation, CVaR, index tracking, a third-moment model), each solved by an open-source solver and checked independently: cutting-plane bounds, KKT conditions, recomputation from returns."
+approach = "Six formulations (mean–variance and its perspective reformulation, absolute deviation, CVaR, index tracking, a third-moment model), each solved by HiGHS or SCIP and checked independently: cutting-plane bounds, KKT conditions, recomputation from returns."
 results = [
   "On OR-Library data, solver values agree with independent recomputation (CVaR to 4 × 10⁻¹⁷); one frontier comparison misses its 5 × 10⁻¹¹ tolerance and is reported as a failure.",
   "No investment result yet: the test needs CRSP data that includes delisted firms, to avoid survivorship bias.",
 ]
 limits = "OR-Library universes contain survivors only and validate computation, not strategy."
 contribution = "Independent project: formulations, certificates and pre-registered test plan."
-tags = ["mixed-integer programming", "portfolio optimization", "CVaR", "Python"]
+tags = ["mixed-integer programming", "portfolio optimization", "CVaR", "Rust"]
 links = [["Repository", "https://github.com/symonyeal/Sparse-Portfolio-Optimization"]]
-source = "README, Status; docs/MODEL.md §3; docs/results"
+source = "README, Models and evidence; docs/results (5b706c1)"
+
+[[project]]
+slug = "open-source-watch"
+title = "Open-Source Watch"
+year = "2026"
+subject = "Applied statistics"
+headline = "An open-source intelligence monitor for seven conflict and shipping regions, rebuilt after twice-daily collection. A trained text classifier replaced keyword rules (68% against 54% correct), and event linkage in Rust takes 0.06 s against 0.54 s."
+problem = "Public reporting on conflicts and shipping arrives from hundreds of feeds of uneven reliability. Which reports describe the same event, and which regional indicators are active, silent or simply missing data?"
+approach = "A Rust engine collects 351 configured sources, grades source reliability, classifies each report with TF-IDF and logistic regression, links related reports into incidents and computes regional indicators. A failed feed is reported as a gap, not as inactivity. The front end is based on IRONSIGHT by Nobler Works."
+results = [
+  "Keyword rules scored 54% on 200 labelled observations; the trained classifier reached 68% under cross-validation and replaced them.",
+  "Incident linkage cut unusual-activity flags from 64 to 39 while keeping 11 of the 13 real ones.",
+  "A filter for permanent heat sources cut one satellite strike indicator from 228 events to 42.",
+]
+limits = "Each item is a source’s claim; a reliability grade does not establish its truth. Rare event types remain weak, and 12% of stored texts were never translated."
+contribution = "Independent project built on the IRONSIGHT front end: engine, collection, classification, linkage and validation."
+tags = ["text classification", "record linkage", "open-source intelligence", "Rust", "TypeScript"]
+links = [["Dashboard", "https://symonyeal.github.io/Open-Source-Watch/"], ["Repository", "https://github.com/symonyeal/Open-Source-Watch"], ["IRONSIGHT", "https://github.com/NoblerWorks-HQ/IRONSIGHT"]]
+source = "README, introduction, Coverage, linkage and Validation (91c33b2)"
 
 [[project]]
 slug = "ball-knowledge"

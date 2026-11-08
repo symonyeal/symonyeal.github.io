@@ -77,6 +77,24 @@ Each entry: the decision, the alternatives, the reason, the date.
 - **Copy rewritten** in plain first person; each card says what the project is and what it found,
   with the numbers unchanged from the sources.
 
+## 2026-11-07, résumé and project refresh
+
+- **Résumé re-transcribed** from the owner's current Word master (`Saimon Islam Master Original
+  Resume.docx`), which the owner rewrote 2026-11-01 to 2026-11-03: Government of Yukon role added,
+  Incepta role and University of Edinburgh exchange added, SFU research bullets replace the earlier
+  ones, ATA dated Dec 2020, summary, skills and courses as in the master. The contact line follows
+  the master's header ("No sponsorship required · Willing to relocate"); phone still omitted. The
+  master's Projects and activities sections are not transcribed: the projects are on the home page.
+- Education entries may omit GPA and awards (the exchange semester has neither).
+- **Thesis link** moved to `thesis/2024/deposited.pdf`; the old manuscript path returned 404.
+- **Project cards rechecked** against each repository's README on `main`. Corrected: Electric
+  Fleet (four certified optima; duals come from the simplex LP, not an interior-point master),
+  MMA counts, Renter Cost Burden (now the Canadian atlas, not the US county study), Electricity
+  (Dantzig–Wolfe, random-system agreement and the archived battery backtest are no longer in the
+  repository), Resilient Supplier Panels (branch and bound, 2 µs median, releases link). Language
+  tags follow each repository. Added: Minimal Metabolic Interventions, Canada Regional Profiles,
+  Open-Source Watch (crediting IRONSIGHT).
+
 ## Open
 
 See [OPEN.md](OPEN.md).

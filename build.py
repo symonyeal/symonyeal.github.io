@@ -121,12 +121,13 @@ def resume():
 <div class="row sub"><span>{e(x['org'])}</span><span>{e(x['place'])}</span></div>{note}<ul>{pts}</ul></article>"""
 
     def ed(x):
-        rows = [f"GPA {e(x['gpa'])}"]
+        rows = [f"GPA {e(x['gpa'])}"] if "gpa" in x else []
         if "thesis" in x:
             rows.append(f"Thesis: {a(x['thesis_url'], x['thesis'])} (senior supervisor: {e(x['supervisor'])})")
         if "courses" in x:
             rows.append(f"Courses: {e(x['courses'])}")
-        rows.append(f"Awards: {e(x['awards'])}")
+        if "awards" in x:
+            rows.append(f"Awards: {e(x['awards'])}")
         return f"""<article class="job"><div class="row"><h3>{e(x['degree'])}</h3><span class="when">{e(x['dates'])}</span></div>
 <div class="row sub"><span>{e(x['org'])}</span><span>{e(x['place'])}</span></div><ul class="plain">{''.join(f'<li>{r}</li>' for r in rows)}</ul></article>"""
 
