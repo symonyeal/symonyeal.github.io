@@ -207,7 +207,7 @@ problem = "Public reporting on conflicts and shipping arrives from hundreds of f
 approach = "A Rust engine collects 351 configured sources, grades source reliability, classifies each report with TF-IDF and logistic regression, links related reports into incidents and computes regional indicators. A failed feed is reported as a gap, not as inactivity. The front end is based on IRONSIGHT by Nobler Works."
 results = [
   "Keyword rules scored 54% on 200 labelled observations; the trained classifier reached 68% under cross-validation and replaced them.",
-  "Incident linkage cut unusual-activity flags from 64 to 39 while keeping 11 of the 13 real ones.",
+  "Incident linkage cut unusual-activity flags from 64 to 38 while keeping 10 of the 13 real ones (rerun 2026-11-07).",
   "A filter for permanent heat sources cut one satellite strike indicator from 228 events to 42.",
 ]
 limits = "Each item is a source’s claim; a reliability grade does not establish its truth. Rare event types remain weak, and 12% of stored texts were never translated."
