@@ -2,7 +2,7 @@
 
 name = "Saimon Islam"
 role = "Operations research and data analysis"
-location = "Vancouver, BC"
+location = "Whitehorse, YT"
 email = "symonyeal@gmail.com"
 github = "https://github.com/symonyeal"
 linkedin = "https://www.linkedin.com/in/saimon-islam-b9291292"
@@ -14,5 +14,5 @@ photo = ""
 status = ""
 
 intro = [
-  "I’m a mathematician in Vancouver working on optimization and applied statistics. I did my MSc in Mathematics at Simon Fraser University, with a thesis on the Fredman–Khachiyan algorithm for hypergraph dualization, then spent 2023 to 2025 as an analyst at the BC Ministry of Health. Since February 2026 I have managed HR information systems projects for the Government of Yukon.",
+  "I’m a mathematician in Whitehorse working on optimization and applied statistics. I did my MSc in Mathematics at Simon Fraser University, with a thesis on the Fredman–Khachiyan algorithm for hypergraph dualization, then spent 2023 to 2025 as an analyst at the BC Ministry of Health. Since February 2026 I have managed HR information systems projects for the Government of Yukon.",
 ]
