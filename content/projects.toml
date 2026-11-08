@@ -171,7 +171,7 @@ problem = "Power plants with start-up costs and minimum outputs cannot be paid b
 approach = "Exact unit-commitment and pricing models on small systems with DC lines and transfer limits: locational marginal, convex-hull and average-incremental-cost prices, with exact unit hulls and a Lagrangian certificate, and each rule settled. HiGHS solves the linear and mixed-integer programs through a native Rust binding."
 results = [
   "FERC staff case: marginal pricing posts $90/MWh at the peak with $1,690 uplift; convex-hull pricing posts $276/MWh with $365.",
-  "Outputs on 29 markets are pinned against an independent implementation, including seeded random markets, duration obligations, zero demand and infeasible minimum output.",
+  "Outputs on 29 markets are pinned against the repository’s earlier implementation (revision ec91593), including seeded random markets, duration obligations, zero demand and infeasible minimum output.",
 ]
 limits = "Small systems; a research benchmark for price formation, not a market model."
 contribution = "Independent project: models, settlement, validation."
